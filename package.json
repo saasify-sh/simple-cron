@@ -1,0 +1,51 @@
+{
+  "name": "cronic",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Easy cron",
+  "repository": "saasify-sh/cronic",
+  "author": "Saasify <dev@saasify.sh>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/index.ts",
+    "predev": "run-s build:routes",
+    "clean": "del build dist",
+    "build": "run-s build:*",
+    "prebuild": "run-s clean",
+    "build:swagger": "tsoa swagger",
+    "build:routes": "tsoa routes",
+    "build:ts": "tsc",
+    "test": "run-s build"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^3.5.1",
+    "dotenv": "^8.2.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-router": "^8.0.8",
+    "lodash.pick": "^4.4.0",
+    "p-map": "^3.0.0",
+    "tsoa": "^2.5.13"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.2",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-compress": "^2.0.9",
+    "@types/koa-router": "^7.4.0",
+    "@types/lodash.pick": "^4.4.6",
+    "@types/node": "^13.7.4",
+    "@types/p-map": "^2.0.0",
+    "cross-env": "^7.0.0",
+    "del-cli": "^3.0.0",
+    "firebase-tools": "^7.14.0",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
+  }
+}

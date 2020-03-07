@@ -1,0 +1,30 @@
+{
+  "name": "spot-twit",
+  "openapi": "./dist/swagger.json",
+  "authProviders": {
+    "github": {
+      "enabled": false
+    },
+    "spotify": {
+      "enabled": true
+    },
+    "twitter": {
+      "enabled": true
+    },
+    "default": {
+      "enabled": true
+    }
+  },
+  "saas": {
+    "name": "Spot-Twit",
+    "heading": "TODO",
+    "subheading": "TODO",
+    "repo": "https://github.com/saasify-sh/spot-twit",
+    "theme": {
+      "name": "waves",
+      "buttonStyle": "rounded",
+      "color": "#ff6e6c",
+      "codeBlockDark": true
+    }
+  }
+}
