@@ -47,7 +47,7 @@ export CRONIC_USER=nala
 All of the following examples use [httpie](https://httpie.org), a modern alternative to `curl`. They're just normal HTTP REST calls, so feel free to replace them with your preferred REST language / client.
 
 ```bash
-# Create a new job that will send a GET request to example.com once a minute
+# Create a new job that will send a GET request to example.com once every minute
 http POST ${CRONIC_URL}/jobs schedule='* * * * *' url='https://example.com' x-saasify-user:${CRONIC_USER}
 ```
 
@@ -82,6 +82,8 @@ The output of your newly created job should look something like this:
   "updatedAt": "2020-03-07T19:10:40.119Z"
 }
 ```
+
+Here are some other ways to manage your job:
 
 ```bash
 # Get the job via its id
