@@ -150,7 +150,7 @@ You need to create a new [Google service account](https://cloud.google.com/docs/
 
 The roles I used are `Cloud Scheduler Admin`, `Cloud Scheduler Service Agent`, `Firebase Admin`, `Firebase Develop Admin`, and `Firebase Admin SDK Administrator Service Agent`.
 
-These roles are a bit of a black box and I'm sure it would work with less roles, but this worked for me. If you figure out the minimal set of roles needed, please open an issue.
+These roles are a bit of a black box and I'm sure it would work with less roles, but this worked for me. If you figure out the minimal set of roles needed, please open an issue to let me know.
 
 #### Misc
 

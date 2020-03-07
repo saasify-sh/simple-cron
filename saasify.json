@@ -1,10 +1,41 @@
 {
   "name": "cronic",
   "openapi": "./dist/swagger.json",
+  "services": [
+    {
+      "path": "/jobs",
+      "httpMethod": "POST",
+      "examples": [
+        {
+          "name": "Create a Job",
+          "description": "Creates a cron job to ping a URL every minute.",
+          "input": {
+            "schedule": "* * * * *",
+            "url": "https://example.com",
+            "httpMethod": "GET"
+          },
+          "output": {
+            "id": "sEfyx6mm2d9smI0xltYI",
+            "schedule": "* * * * *",
+            "url": "https://saasify.sh",
+            "userId": "nala",
+            "timezone": "America/New_York",
+            "httpMethod": "GET",
+            "httpHeaders": {},
+            "description": "",
+            "name": "Default",
+            "tags": [],
+            "createdAt": "2020-03-07T19:10:40.119Z",
+            "updatedAt": "2020-03-07T19:10:40.119Z"
+          }
+        }
+      ]
+    }
+  ],
   "saas": {
     "name": "Cronic",
-    "heading": "Simple Cloud Cron",
-    "subheading": "The most robust cloud cron service for scheduling HTTP calls. Open source, scalable, simple.",
+    "heading": "Cloud Cron Jobs",
+    "subheading": "The simplest and most robust cloud cron service for scheduling HTTP calls. Open source, scalable, simple.",
     "repo": "https://github.com/saasify-sh/cronic",
     "theme": {
       "name": "waves",
