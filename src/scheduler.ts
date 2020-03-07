@@ -65,7 +65,7 @@ function cronJobToSchedulerJob(job: types.CronJob): Scheduler.IJob {
       break
   }
 
-  return {
+  const schedulerJob = {
     name,
     description: job.description,
     schedule: job.schedule,
@@ -78,4 +78,7 @@ function cronJobToSchedulerJob(job: types.CronJob): Scheduler.IJob {
       body: job.httpBody ? Buffer.from(JSON.stringify(job.httpBody)) : undefined
     }
   }
+
+  console.log({ schedulerJob })
+  return schedulerJob
 }

@@ -15,6 +15,7 @@ export async function docToCronJob(
     if (data.userId === userId) {
       return {
         ...data,
+        id: snapshot.id,
         createdAt: snapshot.createTime.toDate(),
         updatedAt: snapshot.updateTime.toDate()
       } as types.CronJob

@@ -21,22 +21,20 @@ export type HttpMethod =
   | 'HEAD'
   | 'OPTIONS'
 
-export class CronJobCreateRequest {
+export interface CronJobCreateRequest {
   schedule: string
-
-  timezone: string = 'America/New_York'
-  timeout: number = 0
+  timezone?: string
 
   url: string
-  httpMethod: HttpMethod = 'GET'
-  httpHeaders: HttpHeaders = {}
-  httpBody: HttpBody = {}
-  httpQuery: HttpQuery = {}
+  httpMethod?: HttpMethod
+  httpHeaders?: HttpHeaders
+  httpBody?: HttpBody
+  httpQuery?: HttpQuery
 
   // metadata
-  name: string = 'Default'
-  description: string = ''
-  tags: string[] = []
+  name?: string
+  description?: string
+  tags?: string[]
 }
 
 export interface CronJobUpdateRequest {
@@ -49,7 +47,6 @@ export interface CronJob {
 
   schedule: string
   timezone: string
-  timeout: number
 
   url: string
   httpMethod: HttpMethod

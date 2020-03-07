@@ -13,11 +13,20 @@ export class CronJobController extends Controller {
   ): Promise<CronJob> {
     console.log('createJob', { body, userId })
 
-    const doc = await db.CronJobs.add({
+    const data = {
+      timezone: 'America/New_York',
+      httpMethod: 'GET',
+      httpHeaders: {},
+      name: 'Default',
+      description: '',
+      tags: [],
       ...body,
       userId
-    })
+    }
+
+    const doc = await db.CronJobs.add(data)
     const job = await db.docToCronJob(doc, userId)
+    console.log({ job })
 
     await scheduler.createJob(job)
     return job
