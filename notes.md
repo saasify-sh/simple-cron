@@ -18,18 +18,20 @@
 - [ ] SaaS
   - Bundles this cron API into a SaaS product via [Saasify](https://saasify.sh)
 
+## Naming Brainstorm
+
+cron
+serverless cron
+cloud cron
+easy cron
+cronic
+simple cron
+
 ## Use Cases
 
-TODOG
+TODO
 
 ## Related
-
----
-
-serverless cron
-cloudcron
-
----
 
 - https://github.com/kelektiv/node-cron - Cron for Node.js.
 - https://github.com/node-cron/node-cron - A simple cron-like job scheduler for Node.js.

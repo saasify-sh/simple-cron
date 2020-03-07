@@ -10,4 +10,7 @@ try {
   const json = JSON.parse(Buffer.from(credentials, 'base64').toString())
   fs.writeFileSync(prodCredentialsPath, JSON.stringify(json))
   process.env.GOOGLE_APPLICATION_CREDENTIALS = prodCredentialsPath
-} catch (err) {}
+} catch (err) {
+  // If the credentials weren't base64-encoded, then we're likely running locally.
+  // Google will throw an error if this isn't the case, so we ignore things here.
+}
