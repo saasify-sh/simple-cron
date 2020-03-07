@@ -42,7 +42,6 @@ export class CronJobController extends Controller {
     const doc = await db.CronJobs.doc(jobId)
     const job = await db.docToCronJob(doc, userId)
 
-    await scheduler.getJob(job)
     return job
   }
 

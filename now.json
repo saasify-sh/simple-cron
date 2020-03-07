@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "@cronic-google-application-credentials",
+    "GOOGLE_PROJECT_ID": "@cronic-google-project-id",
+    "GOOGLE_PROJECT_LOCATION": "@cronic-google-project-location"
+  },
   "builds": [{ "src": "build/index.js", "use": "@now/node" }],
   "routes": [{ "src": ".*", "dest": "build/index.js" }]
 }
