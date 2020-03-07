@@ -25,9 +25,9 @@ yarn
 ```bash
 # Configure your google service account and cloud scheduler
 # See the Setup section below for more details
-echo GOOGLE_APPLICATION_CREDENTIALS='/path/to/service-account.json' > .env
-echo GOOGLE_PROJECT_ID='XXX' > .env
-echo GOOGLE_PROJECT_LOCATION='XXX' > .env
+echo GOOGLE_APPLICATION_CREDENTIALS='/path/to/service-account.json' >> .env
+echo GOOGLE_PROJECT_ID='XXX' >> .env
+echo GOOGLE_PROJECT_LOCATION='XXX' >> .env
 
 # Run the development server
 yarn dev
