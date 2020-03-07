@@ -66,9 +66,9 @@ There are two required parameters: `schedule` and `url`.
 - `httpHeaders` - (object, default `{}`) Optional HTTP headers to use.
 - `httpQuery` - (object, default `{}`) Optional HTTP query parameters to add to the base `url`.
 - `timezone` - (string, default `America/New_York`) Optional [time zone](https://cloud.google.com/dataprep/docs/html/Supported-Time-Zone-Values_66194188) to use.
-- `name` - (string) Optional job name metadata.
-- `description` - (string) Optional job description metadata.
-- `tags` - (string[]) Optional job tags metadata.
+- `name` - (string) Optional metadata name.
+- `description` - (string) Optional metadata description .
+- `tags` - (string[]) Optional metadata tags .
 
 The output of your newly created job should look something like this:
 
@@ -89,7 +89,7 @@ The output of your newly created job should look something like this:
 }
 ```
 
-Here are some other ways to manage your job:
+Here are some of the ways you can manage your job:
 
 ```bash
 # Get the job via its id
