@@ -15,7 +15,7 @@
 - 🤖 Includes an auto-generated OpenAPI spec
 - 👍 Super simple -- Google does all the hard work for us
 
-## Usage
+## Install
 
 ```bash
 # Install dependencies
@@ -37,6 +37,8 @@ yarn build
 yarn start
 ```
 
+## Usage
+
 Now let's set up some useful environment variables for the following examples. We'll be using the local dev server and a fake user named `nala` (my wonderful kitty 😻).
 
 ```bash
@@ -46,7 +48,9 @@ export CRONIC_USER=nala
 
 All of the following examples use [httpie](https://httpie.org), a modern alternative to `curl`. They're just normal HTTP REST calls, so feel free to replace them with your preferred REST language / client.
 
-![Cron expression syntax](https://raw.githubusercontent.com/saasify-sh/cronic/master/media/cron-syntax.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/saasify-sh/cronic/master/media/cron-syntax.png" alt="Cron expression syntax" width="480" />
+</p>
 
 ```bash
 # Create a new job that will send a GET request to example.com once every minute
@@ -104,7 +108,7 @@ http PUT ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER} s
 http DELETE ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER}
 ```
 
-## Deploying
+## Deploy
 
 Once you have the project working locally, you can deploy it anywhere you want: Heroku, AWS, GCP, etc.
 
