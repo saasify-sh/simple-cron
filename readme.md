@@ -1,6 +1,6 @@
 # Cronic
 
-> TODO
+> Dead simple cron service for invoking HTTP calls on a schedule.
 
 [![Build Status](https://travis-ci.com/saasify-sh/cronic.svg?branch=master)](https://travis-ci.com/saasify-sh/cronic) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -18,6 +18,22 @@ yarn
 ```
 
 TODO
+
+## TODO
+
+- [x] API
+  - Creates and manages CronJobs
+  - Hosted on ZEIT now
+- [ ] Scheduler
+  - Creates CronJobRuns from CronJobs based on their schedules
+  - Hosted anywhere?
+  - How to scale horizontally?
+- [ ] Runner
+  - Executes CronJobRuns taking them from pending => success or failure
+  - Triggered by the creation of CronJobRuns
+  - Google Cloud Functions
+- [ ] SaaS
+  - Bundles this cron API into a SaaS product via [Saasify](https://saasify.sh)
 
 ## Related
 

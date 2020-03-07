@@ -2,7 +2,7 @@
   "name": "cronic",
   "version": "0.1.0",
   "private": true,
-  "description": "Easy cron",
+  "description": "Dead simple cron service",
   "repository": "saasify-sh/cronic",
   "author": "Saasify <dev@saasify.sh>",
   "license": "MIT",
