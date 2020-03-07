@@ -1,25 +1,11 @@
 {
-  "name": "spot-twit",
+  "name": "cronic",
   "openapi": "./dist/swagger.json",
-  "authProviders": {
-    "github": {
-      "enabled": false
-    },
-    "spotify": {
-      "enabled": true
-    },
-    "twitter": {
-      "enabled": true
-    },
-    "default": {
-      "enabled": true
-    }
-  },
   "saas": {
-    "name": "Spot-Twit",
-    "heading": "TODO",
-    "subheading": "TODO",
-    "repo": "https://github.com/saasify-sh/spot-twit",
+    "name": "Cronic",
+    "heading": "Dead simple cron service",
+    "subheading": "The most robust cron service for scheduling HTTP calls. Open source, scalable, simple.",
+    "repo": "https://github.com/saasify-sh/cronic",
     "theme": {
       "name": "waves",
       "buttonStyle": "rounded",

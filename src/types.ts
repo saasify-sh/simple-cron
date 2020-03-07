@@ -10,26 +10,25 @@ export interface HttpHeaders {
   [key: string]: string
 }
 
-export type CronJobStatus = 'enabled' | 'disabled'
+export type CronJobState = 'enabled' | 'disabled' | 'paused'
 export type CronJobRunStatus = 'pending' | 'success' | 'failure'
 export type HttpMethod =
-  | 'get'
-  | 'post'
-  | 'put'
-  | 'delete'
-  | 'trace'
-  | 'patch'
-  | 'head'
-  | 'options'
+  | 'GET'
+  | 'POST'
+  | 'PUT'
+  | 'DELETE'
+  | 'PATCH'
+  | 'HEAD'
+  | 'OPTIONS'
 
 export class CronJobCreateRequest {
-  cronExpression: string
-  url: string
+  schedule: string
 
   timezone: string = 'America/New_York'
   timeout: number = 0
 
-  httpMethod: HttpMethod = 'get'
+  url: string
+  httpMethod: HttpMethod = 'GET'
   httpHeaders: HttpHeaders = {}
   httpBody: HttpBody = {}
   httpQuery: HttpQuery = {}
@@ -41,14 +40,14 @@ export class CronJobCreateRequest {
 }
 
 export interface CronJobUpdateRequest {
-  status: CronJobStatus
+  state: CronJobState
 }
 
 export interface CronJob {
   id: string
   userId: string
 
-  cronExpression: string
+  schedule: string
   timezone: string
   timeout: number
 
@@ -63,9 +62,9 @@ export interface CronJob {
   description: string
   tags: string[]
 
-  status: CronJobStatus
-  numRunsSuccess: number
-  numRunsFailure: number
+  state: CronJobState
+  // numRunsSuccess: number
+  // numRunsFailure: number
 
   createdAt: Date
   updatedAt: Date
@@ -76,9 +75,9 @@ export interface CronJob {
   // webhook stuff
 }
 
-export interface CronJobRun {
-  id: string
-  cronJob: string
-  status: CronJobRunStatus
-  httpStatus: number
-}
+// export interface CronJobRun {
+//   id: string
+//   cronJob: string
+//   status: CronJobRunStatus
+//   httpStatus: number
+// }

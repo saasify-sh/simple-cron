@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Put, Route, Header } from 'tsoa'
-
 import { CronJob, CronJobCreateRequest, CronJobUpdateRequest } from './types'
+
 import * as db from './db'
-import * as utils from './utils'
+import * as scheduler from './scheduler'
 
 @Route('/jobs')
 export class CronJobController extends Controller {
@@ -17,8 +17,10 @@ export class CronJobController extends Controller {
       ...body,
       userId
     })
+    const job = await db.docToCronJob(doc, userId)
 
-    return utils.docToCronJob(doc, userId)
+    await scheduler.createJob(job)
+    return job
   }
 
   @Get(`/{jobId}`)
@@ -29,7 +31,10 @@ export class CronJobController extends Controller {
     console.log('getJob', { jobId, userId })
 
     const doc = await db.CronJobs.doc(jobId)
-    return utils.docToCronJob(doc, userId)
+    const job = await db.docToCronJob(doc, userId)
+
+    await scheduler.getJob(job)
+    return job
   }
 
   @Put(`/{jobId}`)
@@ -47,7 +52,10 @@ export class CronJobController extends Controller {
 
       if (data.userId === userId) {
         await doc.set(body)
-        return utils.docToCronJob(doc, userId)
+        const job = await db.docToCronJob(doc, userId)
+
+        await scheduler.updateJob(job)
+        return job
       }
     }
 

@@ -1,15 +1,28 @@
-import { Firestore } from '@google-cloud/firestore'
+import { DocumentReference, Firestore } from '@google-cloud/firestore'
+import * as types from './types'
 
 export const db = new Firestore()
 export const CronJobs = db.collection('cron-jobs')
-export const CronJobRuns = db.collection('cron-job-runs')
 
-// export async function addUser() {
-//   const doc = await users.add({
-//     first: 'Nala',
-//     last: 'Fischer',
-//     born: 2011
-//   })
-//   const snap = await doc.get()
-//   return snap.data()
-// }
+export async function docToCronJob(
+  doc: DocumentReference,
+  userId: string
+): Promise<types.CronJob> {
+  const snapshot = await doc.get()
+
+  if (snapshot.exists) {
+    const data = snapshot.data()
+    if (data.userId === userId) {
+      return {
+        ...data,
+        createdAt: snapshot.createTime.toDate(),
+        updatedAt: snapshot.updateTime.toDate()
+      } as types.CronJob
+    }
+  }
+
+  throw {
+    message: 'Not found',
+    status: 404
+  }
+}

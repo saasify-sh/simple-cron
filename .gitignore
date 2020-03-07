@@ -64,4 +64,4 @@ dist/
 build/
 
 .now
-.firebase-key.json
+.google.json
