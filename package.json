@@ -7,7 +7,7 @@
   "author": "Saasify <dev@saasify.sh>",
   "license": "MIT",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "start": "node build/server.js",
@@ -19,12 +19,15 @@
     "build:swagger": "tsoa swagger",
     "build:routes": "tsoa routes",
     "build:ts": "tsc",
-    "test": "run-s build"
+    "test": "run-s build",
+    "deploy": "now",
+    "predeploy": "run-s build",
+    "postdeploy": "now rm --safe cronic"
   },
   "dependencies": {
     "@google-cloud/firestore": "^3.5.1",
     "@google-cloud/scheduler": "^1.5.0",
-    "dotenv-safe": "^8.2.0",
+    "dotenv": "^8.2.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-compress": "^3.0.0",

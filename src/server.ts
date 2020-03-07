@@ -1,5 +1,4 @@
-require('dotenv-safe').config()
-
+import './bootstrap'
 import './cron'
 
 import * as http from 'http'
