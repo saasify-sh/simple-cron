@@ -3,8 +3,8 @@
   "openapi": "./dist/swagger.json",
   "saas": {
     "name": "Cronic",
-    "heading": "Dead simple cron service",
-    "subheading": "The most robust cron service for scheduling HTTP calls. Open source, scalable, simple.",
+    "heading": "Simple Cloud Cron",
+    "subheading": "The most robust cloud cron service for scheduling HTTP calls. Open source, scalable, simple.",
     "repo": "https://github.com/saasify-sh/cronic",
     "theme": {
       "name": "waves",
