@@ -1,29 +1,43 @@
-import { DocumentReference, Firestore } from '@google-cloud/firestore'
+import * as firestore from '@google-cloud/firestore'
 import * as types from './types'
 
-export const db = new Firestore()
+export const db = new firestore.Firestore()
 export const CronJobs = db.collection('cron-jobs')
 
-export async function docToCronJob(
-  doc: DocumentReference,
-  userId: string
-): Promise<types.CronJob> {
+export async function get<T extends types.Model>(
+  doc: firestore.DocumentReference,
+  userId?: string
+): Promise<T> {
   const snapshot = await doc.get()
 
   if (snapshot.exists) {
-    const data = snapshot.data()
-    if (data.userId === userId) {
-      return {
-        ...data,
-        id: snapshot.id,
-        createdAt: snapshot.createTime.toDate(),
-        updatedAt: snapshot.updateTime.toDate()
-      } as types.CronJob
+    const res = getSnapshot<T>(snapshot)
+
+    if (userId && res.userId && res.userId !== userId) {
+      throw {
+        message: 'Unauthorized',
+        status: 403
+      }
     }
+
+    return res
   }
 
   throw {
     message: 'Not found',
     status: 404
   }
+}
+
+export function getSnapshot<T extends types.Model>(
+  snapshot: firestore.DocumentSnapshot<firestore.DocumentData>
+): T {
+  const data = snapshot.data()
+
+  return {
+    ...data,
+    id: snapshot.id,
+    createdAt: snapshot.createTime.toDate(),
+    updatedAt: snapshot.updateTime.toDate()
+  } as T
 }

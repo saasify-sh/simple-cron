@@ -1,5 +1,6 @@
 {
   "name": "cronic",
+  "alias": "cronic",
   "openapi": "./dist/swagger.json",
   "services": [
     {

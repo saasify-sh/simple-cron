@@ -41,10 +41,15 @@ export interface CronJobUpdateRequest {
   state: CronJobState
 }
 
-export interface CronJob {
+export interface Model {
   id: string
   userId: string
 
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface CronJob extends Model {
   schedule: string
   timezone: string
 
@@ -62,9 +67,6 @@ export interface CronJob {
   state: CronJobState
   // numRunsSuccess: number
   // numRunsFailure: number
-
-  createdAt: Date
-  updatedAt: Date
 
   // TODO
   // slack stuff

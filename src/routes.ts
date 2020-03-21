@@ -35,6 +35,8 @@ const models: TsoaRoute.Models = {
     "properties": {
       "id": { "dataType": "string", "required": true },
       "userId": { "dataType": "string", "required": true },
+      "createdAt": { "dataType": "datetime", "required": true },
+      "updatedAt": { "dataType": "datetime", "required": true },
       "schedule": { "dataType": "string", "required": true },
       "timezone": { "dataType": "string", "required": true },
       "url": { "dataType": "string", "required": true },
@@ -46,8 +48,6 @@ const models: TsoaRoute.Models = {
       "description": { "dataType": "string", "required": true },
       "tags": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
       "state": { "dataType": "enum", "enums": ["enabled", "disabled", "paused"], "required": true },
-      "createdAt": { "dataType": "datetime", "required": true },
-      "updatedAt": { "dataType": "datetime", "required": true },
     },
     "additionalProperties": true,
   },
@@ -126,6 +126,28 @@ export function RegisterRoutes(router: KoaRouter) {
       const controller = new CronJobController();
 
       const promise = controller.getJob.apply(controller, validatedArgs as any);
+      return promiseHandler(controller, promise, context, next);
+    });
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  router.get('/jobs',
+    async (context: any, next: any) => {
+      const args = {
+        offset: { "default": 0, "in": "query", "name": "offset", "dataType": "double" },
+        limit: { "default": 100, "in": "query", "name": "limit", "dataType": "double" },
+        userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, context);
+      } catch (error) {
+        context.status = error.status;
+        context.throw(error.status, JSON.stringify({ fields: error.fields }));
+      }
+
+      const controller = new CronJobController();
+
+      const promise = controller.listJobs.apply(controller, validatedArgs as any);
       return promiseHandler(controller, promise, context, next);
     });
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

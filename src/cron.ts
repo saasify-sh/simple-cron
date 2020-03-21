@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put, Route, Header } from 'tsoa'
+import { Body, Controller, Get, Post, Put, Query, Route, Header } from 'tsoa'
 import { CronJob, CronJobCreateRequest, CronJobUpdateRequest } from './types'
 
 import * as db from './db'
@@ -25,7 +25,7 @@ export class CronJobController extends Controller {
     }
 
     const doc = await db.CronJobs.add(data)
-    const job = await db.docToCronJob(doc, userId)
+    const job = await db.get<CronJob>(doc, userId)
     console.log({ job })
 
     await scheduler.createJob(job)
@@ -40,9 +40,26 @@ export class CronJobController extends Controller {
     console.log('getJob', { jobId, userId })
 
     const doc = await db.CronJobs.doc(jobId)
-    const job = await db.docToCronJob(doc, userId)
+    const job = await db.get<CronJob>(doc, userId)
 
     return job
+  }
+
+  @Get()
+  public async listJobs(
+    @Query() offset: number = 0,
+    @Query() limit: number = 100,
+    @Header('x-saasify-user') userId: string
+  ): Promise<CronJob[]> {
+    console.log('listJobs', { offset, limit, userId })
+
+    const { docs } = await db.CronJobs.where('userId', '==', userId)
+      .offset(offset)
+      .limit(limit)
+      .get()
+
+    const jobs = docs.map((doc) => db.getSnapshot<CronJob>(doc))
+    return jobs
   }
 
   @Put(`/{jobId}`)
@@ -60,7 +77,7 @@ export class CronJobController extends Controller {
 
       if (data.userId === userId) {
         await doc.set(body)
-        const job = await db.docToCronJob(doc, userId)
+        const job = await db.get<CronJob>(doc, userId)
 
         await scheduler.updateJob(job)
         return job

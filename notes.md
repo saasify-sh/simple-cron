@@ -2,20 +2,31 @@
 
 ## TODO
 
-- [x] API
+- [ ] Customize SaaS design
+- [ ] Customize SaaS pricing
+- [ ] Customize SaaS features
+- [ ] Customize SaaS readme
+- [ ] Simplify main readme to show usage
+  - Move self-hosting info into a separate doc
+- [ ] Add use cases section
+- [ ] Create blog post
+
+## Alternative Architecture
+
+- API
   - Creates and manages CronJobs
   - Hosted on ZEIT now or Google Cloud Functions
-- [ ] Scheduler
+- Scheduler
   - Creates CronJobRuns from CronJobs based on their schedules
   - Hosted anywhere?
   - How to scale scheduling horizontally?
     - Post-MVP; also may not be necessary given the Runner is doing the real work
     - Easiest solution would be static N servers and round-robin
-- [ ] Runner
+- Runner
   - Executes CronJobRuns taking them from pending => success or failure
   - Triggered by the creation of CronJobRuns in Cloud Firestore
   - Implemented via Google Cloud Functions
-- [ ] SaaS
+- SaaS
   - Bundles this cron API into a SaaS product via [Saasify](https://saasify.sh)
 
 ## Naming Brainstorm
@@ -26,10 +37,6 @@ cloud cron
 easy cron
 cronic
 simple cron
-
-## Use Cases
-
-TODO
 
 ## Related
 
