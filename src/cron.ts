@@ -102,7 +102,7 @@ export class CronJobController extends Controller {
       const data = snapshot.data()
 
       if (data.userId === userId) {
-        await doc.set(body)
+        await doc.update(body)
         const job = await db.get<CronJob>(doc, userId)
 
         await scheduler.updateJob(job)

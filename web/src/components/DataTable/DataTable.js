@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import cs from 'classnames'
 
 import { format } from 'date-fns'
-import { Button, Divider, Modal, Table, Tag } from 'antd'
+import { Button, Divider, Modal, Table, Tag, message, notification } from 'antd'
 
 import { Paper } from '../Paper/Paper'
 import { NewJobForm } from '../NewJobForm/NewJobForm'
@@ -46,7 +46,7 @@ export class DataTable extends Component {
       dataIndex: 'httpMethod'
     },
     {
-      title: 'State',
+      title: 'Status',
       dataIndex: 'state',
       render: (state) => {
         switch (state) {
@@ -65,8 +65,20 @@ export class DataTable extends Component {
       title: 'Actions',
       render: (_, job) => (
         <span>
-          <a>TODO</a>
+          {job.state === 'enabled' && (
+            <a onClick={() => this._onUpdateJob(job, { state: 'paused' })}>
+              Pause
+            </a>
+          )}
+
+          {job.state === 'paused' && (
+            <a onClick={() => this._onUpdateJob(job, { state: 'enabled' })}>
+              Resume
+            </a>
+          )}
+
           <Divider type='vertical' />
+
           <a onClick={() => this._onOpenRemoveJobModal(job)}>Delete</a>
         </span>
       )
@@ -227,5 +239,26 @@ export class DataTable extends Component {
 
   _onCloseRemoveJobModal = () => {
     this.setState({ isOpenRemoveJobModal: false })
+  }
+
+  _onUpdateJob = (job, data) => {
+    this.setState({ loading: true })
+
+    sdk.api
+      .put(`/jobs/${job.id}`, { data })
+      .then(() => {
+        message.success('Job updated')
+        this._fetch({ reset: true })
+      })
+      .catch((err) => {
+        console.error(err)
+        this.setState({ loading: false })
+
+        notification.error({
+          message: 'Error updating job',
+          description: err?.response?.data?.error || err.message,
+          duration: 10
+        })
+      })
   }
 }
