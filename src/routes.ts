@@ -30,6 +30,15 @@ const models: TsoaRoute.Models = {
     "additionalProperties": { "dataType": "string" },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  "HttpStatus": {
+    "dataType": "refObject",
+    "properties": {
+      "code": { "dataType": "double" },
+      "message": { "dataType": "string" },
+    },
+    "additionalProperties": true,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   "CronJob": {
     "dataType": "refObject",
     "properties": {
@@ -48,6 +57,9 @@ const models: TsoaRoute.Models = {
       "description": { "dataType": "string", "required": true },
       "tags": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
       "state": { "dataType": "enum", "enums": ["enabled", "disabled", "paused"], "required": true },
+      "lastAttemptTime": { "dataType": "datetime" },
+      "nextAttemptTime": { "dataType": "datetime" },
+      "status": { "ref": "HttpStatus" },
     },
     "additionalProperties": true,
   },

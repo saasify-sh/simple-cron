@@ -1,3 +1,4 @@
+import pMap = require('p-map')
 import {
   Body,
   Controller,
@@ -42,7 +43,7 @@ export class CronJobController extends Controller {
     const schedulerJob = await scheduler.createJob(job)
     console.log({ schedulerJob })
 
-    return job
+    return scheduler.enrichJob(job, schedulerJob)
   }
 
   @Get(`/{jobId}`)
@@ -58,21 +59,21 @@ export class CronJobController extends Controller {
     const schedulerJob = await scheduler.getJob(job)
     console.log({ schedulerJob })
 
-    return job
+    return scheduler.enrichJob(job, schedulerJob)
   }
 
   @Delete(`/{jobId}`)
   public async removeJob(
     jobId: string,
     @Header('x-saasify-user') userId: string
-  ): Promise<CronJob> {
+  ): Promise<void> {
     console.log('removeJob', { jobId, userId })
 
     const doc = db.CronJobs.doc(jobId)
     const job = await db.get<CronJob>(doc, userId)
-    await doc.delete()
 
-    return job
+    await scheduler.deleteJob(job)
+    await doc.delete()
   }
 
   @Get()
@@ -89,7 +90,17 @@ export class CronJobController extends Controller {
       .get()
 
     const jobs = docs.map((doc) => db.getSnapshot<CronJob>(doc))
-    return jobs
+
+    return pMap(
+      jobs,
+      async (job) => {
+        const schedulerJob = await scheduler.getJob(job)
+        return scheduler.enrichJob(job, schedulerJob)
+      },
+      {
+        concurrency: 4
+      }
+    )
   }
 
   @Put(`/{jobId}`)
@@ -110,8 +121,8 @@ export class CronJobController extends Controller {
         await doc.update(body)
         const job = await db.get<CronJob>(doc, userId)
 
-        await scheduler.updateJob(job)
-        return job
+        const schedulerJob = await scheduler.updateJob(job)
+        return scheduler.enrichJob(job, schedulerJob)
       }
     }
 

@@ -31,6 +31,14 @@ export async function getJob(job: types.CronJob): Promise<Scheduler.IJob> {
   return jobResult[0]
 }
 
+export async function deleteJob(job: types.CronJob): Promise<void> {
+  const name = getSchedulerJobName(job)
+
+  await client.deleteJob({
+    name
+  })
+}
+
 export async function updateJob(job: types.CronJob): Promise<Scheduler.IJob> {
   const jobResult = await client.updateJob({
     job: cronJobToSchedulerJob(job)
