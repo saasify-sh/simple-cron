@@ -42,7 +42,7 @@ export class RemoveJobModal extends Component {
         notification.error({
           message: 'Error removing job',
           description: err?.response?.data?.error || err.message,
-          duration: 10000
+          duration: 10
         })
       })
   }
