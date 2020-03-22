@@ -129,6 +129,27 @@ export function RegisterRoutes(router: KoaRouter) {
       return promiseHandler(controller, promise, context, next);
     });
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  router.delete('/jobs/:jobId',
+    async (context: any, next: any) => {
+      const args = {
+        jobId: { "in": "path", "name": "jobId", "required": true, "dataType": "string" },
+        userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, context);
+      } catch (error) {
+        context.status = error.status;
+        context.throw(error.status, JSON.stringify({ fields: error.fields }));
+      }
+
+      const controller = new CronJobController();
+
+      const promise = controller.removeJob.apply(controller, validatedArgs as any);
+      return promiseHandler(controller, promise, context, next);
+    });
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   router.get('/jobs',
     async (context: any, next: any) => {
       const args = {

@@ -2,73 +2,86 @@ import React, { Component } from 'react'
 import cs from 'classnames'
 
 import { format } from 'date-fns'
-import { Button, Modal, Table, Tag } from 'antd'
+import { Button, Divider, Modal, Table, Tag } from 'antd'
 
 import { Paper } from '../Paper/Paper'
 import { NewJobForm } from '../NewJobForm/NewJobForm'
+import { RemoveJobModal } from '../RemoveJobModal/RemoveJobModal'
 import { sdk } from '../../lib/sdk'
 
 import styles from './styles.module.css'
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    render: (id) => <b>{id}</b>
-  },
-  // {
-  //   title: 'ID',
-  //   dataIndex: 'id',
-  //   render: (id) => <i>{id}</i>
-  // },
-  {
-    title: 'Created',
-    dataIndex: 'createdAt',
-    render: (timestamp) => format(new Date(timestamp), 'MM/dd/yyyy')
-  },
-  {
-    title: 'Schedule',
-    dataIndex: 'schedule'
-  },
-  {
-    title: 'URL',
-    dataIndex: 'url',
-    render: (url) => (
-      <a href={url} target='_blank' rel='noopener noreferrer'>
-        {url}
-      </a>
-    )
-  },
-  {
-    title: 'Method',
-    dataIndex: 'httpMethod'
-  },
-  {
-    title: 'State',
-    dataIndex: 'state',
-    render: (state) => {
-      switch (state) {
-        case 'enabled':
-          return <Tag color='green'>enabled</Tag>
-        case 'disabled':
-          return <Tag color='red'>disabled</Tag>
-        case 'paused':
-          return <Tag color='orange'>paused</Tag>
-        default:
-          return <Tag color='purple'>unknown</Tag>
-      }
-    }
-  }
-]
-
 export class DataTable extends Component {
+  columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      render: (id) => <b>{id}</b>
+    },
+    // {
+    //   title: 'ID',
+    //   dataIndex: 'id',
+    //   render: (id) => <i>{id}</i>
+    // },
+    {
+      title: 'Created',
+      dataIndex: 'createdAt',
+      render: (timestamp) => format(new Date(timestamp), 'MM/dd/yyyy')
+    },
+    {
+      title: 'Schedule',
+      dataIndex: 'schedule'
+    },
+    {
+      title: 'URL',
+      dataIndex: 'url',
+      render: (url) => (
+        <a href={url} target='_blank' rel='noopener noreferrer'>
+          {url}
+        </a>
+      )
+    },
+    {
+      title: 'Method',
+      dataIndex: 'httpMethod'
+    },
+    {
+      title: 'State',
+      dataIndex: 'state',
+      render: (state) => {
+        switch (state) {
+          case 'enabled':
+            return <Tag color='green'>enabled</Tag>
+          case 'disabled':
+            return <Tag color='red'>disabled</Tag>
+          case 'paused':
+            return <Tag color='orange'>paused</Tag>
+          default:
+            return <Tag color='purple'>unknown</Tag>
+        }
+      }
+    },
+    {
+      title: 'Actions',
+      render: (_, job) => (
+        <span>
+          <a>TODO</a>
+          <Divider type='vertical' />
+          <a onClick={() => this._onOpenRemoveJobModal(job)}>Delete</a>
+        </span>
+      )
+    }
+  ]
+
   state = {
     data: [],
     pagination: {
       pageSize: 25
     },
     loading: true,
-    isOpenAddNewJobModal: false
+    isOpenAddNewJobModal: false,
+    isOpenRemoveJobModal: false,
+    selectedJob: null
   }
 
   componentDidMount() {
@@ -77,7 +90,14 @@ export class DataTable extends Component {
 
   render() {
     const { className, ...rest } = this.props
-    const { data, pagination, loading, isOpenAddNewJobModal } = this.state
+    const {
+      data,
+      pagination,
+      loading,
+      isOpenAddNewJobModal,
+      isOpenRemoveJobModal,
+      selectedJob
+    } = this.state
 
     return (
       <Paper className={cs(styles.body, className)} {...rest}>
@@ -94,7 +114,7 @@ export class DataTable extends Component {
         </div>
 
         <Table
-          columns={columns}
+          columns={this.columns}
           rowKey='id'
           dataSource={data}
           pagination={pagination}
@@ -115,6 +135,13 @@ export class DataTable extends Component {
             />
           )}
         </Modal>
+
+        <RemoveJobModal
+          isOpen={isOpenRemoveJobModal}
+          job={selectedJob}
+          onCancel={this._onCloseRemoveJobModal}
+          onDone={this._onDoneRemoveJobModal}
+        />
       </Paper>
     )
   }
@@ -187,5 +214,18 @@ export class DataTable extends Component {
 
   _onCloseAddNewJobModal = () => {
     this.setState({ isOpenAddNewJobModal: false })
+  }
+
+  _onOpenRemoveJobModal = (job) => {
+    this.setState({ isOpenRemoveJobModal: true, selectedJob: job })
+  }
+
+  _onDoneRemoveJobModal = () => {
+    this._fetch({ reset: true })
+    this._onCloseRemoveJobModal()
+  }
+
+  _onCloseRemoveJobModal = () => {
+    this.setState({ isOpenRemoveJobModal: false })
   }
 }
