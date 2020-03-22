@@ -51,13 +51,13 @@ export class DataTable extends Component {
       render: (state) => {
         switch (state) {
           case 'enabled':
-            return <Tag color='green'>enabled</Tag>
+            return <Tag color='green'>Enabled</Tag>
           case 'disabled':
-            return <Tag color='red'>disabled</Tag>
+            return <Tag color='red'>Disabled</Tag>
           case 'paused':
-            return <Tag color='orange'>paused</Tag>
+            return <Tag color='orange'>Paused</Tag>
           default:
-            return <Tag color='purple'>unknown</Tag>
+            return <Tag color='purple'>Unknown</Tag>
         }
       }
     },

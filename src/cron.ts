@@ -39,7 +39,9 @@ export class CronJobController extends Controller {
     const job = await db.get<CronJob>(doc, userId)
     console.log({ job })
 
-    await scheduler.createJob(job)
+    const schedulerJob = await scheduler.createJob(job)
+    console.log({ schedulerJob })
+
     return job
   }
 
@@ -50,8 +52,11 @@ export class CronJobController extends Controller {
   ): Promise<CronJob> {
     console.log('getJob', { jobId, userId })
 
-    const doc = await db.CronJobs.doc(jobId)
+    const doc = db.CronJobs.doc(jobId)
     const job = await db.get<CronJob>(doc, userId)
+
+    const schedulerJob = await scheduler.getJob(job)
+    console.log({ schedulerJob })
 
     return job
   }
@@ -63,7 +68,7 @@ export class CronJobController extends Controller {
   ): Promise<CronJob> {
     console.log('removeJob', { jobId, userId })
 
-    const doc = await db.CronJobs.doc(jobId)
+    const doc = db.CronJobs.doc(jobId)
     const job = await db.get<CronJob>(doc, userId)
     await doc.delete()
 
@@ -95,7 +100,7 @@ export class CronJobController extends Controller {
   ): Promise<CronJob> {
     console.log('updateJob', { jobId, body, userId })
 
-    const doc = await db.CronJobs.doc(jobId)
+    const doc = db.CronJobs.doc(jobId)
     const snapshot = await doc.get()
 
     if (snapshot.exists) {

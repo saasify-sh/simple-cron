@@ -1,5 +1,7 @@
 import { URL } from 'url'
 import * as scheduler from '@google-cloud/scheduler'
+
+import * as grpc from './grpc'
 import * as types from './types'
 
 import Scheduler = scheduler.protos.google.cloud.scheduler.v1
@@ -79,6 +81,31 @@ function cronJobToSchedulerJob(job: types.CronJob): Scheduler.IJob {
     }
   }
 
-  console.log({ schedulerJob })
+  // console.log({ schedulerJob })
   return schedulerJob
+}
+
+export function enrichJob(
+  job: types.CronJob,
+  schedulerJob: Scheduler.IJob
+): types.CronJob {
+  if (schedulerJob.lastAttemptTime) {
+    job.lastAttemptTime = new Date(
+      +schedulerJob.lastAttemptTime.seconds * 1000 +
+        +schedulerJob.lastAttemptTime.nanos * 10000
+    )
+  }
+
+  if (schedulerJob.scheduleTime) {
+    job.nextAttemptTime = new Date(
+      +schedulerJob.scheduleTime.seconds * 1000 +
+        +schedulerJob.scheduleTime.nanos * 10000
+    )
+  }
+
+  if (schedulerJob.status) {
+    job.status = grpc.convertCode(schedulerJob.status.code)
+  }
+
+  return job
 }

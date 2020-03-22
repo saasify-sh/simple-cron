@@ -49,6 +49,11 @@ export interface Model {
   updatedAt: Date
 }
 
+export interface HttpStatus {
+  code?: number
+  message?: string
+}
+
 export interface CronJob extends Model {
   schedule: string
   timezone: string
@@ -65,6 +70,12 @@ export interface CronJob extends Model {
   tags: string[]
 
   state: CronJobState
+
+  lastAttemptTime?: Date
+  nextAttemptTime?: Date
+
+  status?: HttpStatus
+
   // numRunsSuccess: number
   // numRunsFailure: number
 
