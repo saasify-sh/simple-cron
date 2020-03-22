@@ -3,6 +3,11 @@ import pick = require('lodash.pick')
 
 import * as types from './types'
 
+const logEntryTypeAttemptFinished =
+  'entry.data.type.googleapis.com/google.cloud.scheduler.logging.AttemptFinished'
+const logEntryTypeAttemptStarted =
+  'entry.data.type.googleapis.com/google.cloud.scheduler.logging.AttemptStarted'
+
 const client = new Logging()
 
 export async function getJobLogs(
@@ -11,27 +16,10 @@ export async function getJobLogs(
 ): Promise<types.LogEntry[]> {
   const filter = `resource.type="cloud_scheduler_job" AND resource.labels.job_id="${job.id}"`
 
-  console.log({ filter })
   const [entries] = await client.getEntries({
     filter,
     pageSize: opts.limit || 25
   })
-  console.log({ entries })
-
-  console.log()
-  console.log()
-  console.log()
-  console.log()
-
-  for (const entry of entries) {
-    console.log('metadata', entry.metadata)
-    console.log('data', entry.data)
-  }
-
-  console.log()
-  console.log()
-  console.log()
-  console.log()
 
   return entries.map((entry) => encodeLogEntry(entry, job))
 }
@@ -44,21 +32,31 @@ function encodeLogEntry(entry: Entry, job: types.CronJob): types.LogEntry {
     'timestamp'
   ])
 
-  const data = pick(entry.data, ['url', 'status'])
-  let status = {
-    message: data.status,
-    code: metadata.httpRequest ? metadata.httpRequest.status : undefined
-  }
+  const { url, statusMessage } = entry.data
+  const type = entry.data['@type']
+  let status = null
 
-  if (!Object.keys(status).length) {
-    status = null
+  if (type === logEntryTypeAttemptFinished) {
+    status = {
+      message: statusMessage,
+      code: metadata.httpRequest ? metadata.httpRequest.status : undefined
+    }
+
+    if (!status.message && status.code === 200) {
+      status.message = 'OK'
+    }
+  } else if (type === logEntryTypeAttemptStarted) {
+    status = {
+      message: 'Attempt started'
+    }
   }
 
   return {
     jobId: job.id,
     userId: job.userId,
+    httpMethod: job.httpMethod,
     ...metadata,
-    ...data,
+    url,
     status
   }
 }
