@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cs from 'classnames'
+import { isValidCron } from 'cron-validator'
 
 import { Button, Form, Icon, Input, Select, Tooltip, notification } from 'antd'
 import { sdk } from '../../lib/sdk'
@@ -58,6 +59,15 @@ export class NewJobForm extends Component {
               {
                 required: true,
                 message: 'Please enter a cron schedule.'
+              },
+              {
+                validator: (rule, value, cb) => {
+                  if (!isValidCron(value)) {
+                    return cb('Please enter a valid cron expression.')
+                  } else {
+                    return cb()
+                  }
+                }
               }
             ]
           })(
