@@ -21,7 +21,8 @@ export class CronJobController extends Controller {
       description: '',
       tags: [],
       ...body,
-      userId
+      userId,
+      state: 'enabled'
     }
 
     const doc = await db.CronJobs.add(data)
