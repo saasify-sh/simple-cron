@@ -21,7 +21,7 @@ import { sdk } from '../../lib/sdk'
 
 import styles from './styles.module.css'
 
-export class DataTable extends Component {
+export class JobsTable extends Component {
   columns = [
     {
       title: 'Name',

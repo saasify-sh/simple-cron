@@ -1,2 +1,2 @@
-export * from './DataTable/DataTable'
+export * from './JobsTable/JobsTable'
 export * from './Paper/Paper'

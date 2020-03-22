@@ -1,7 +1,7 @@
 import React from 'react'
 import { Spin } from 'antd'
 import { sdk } from './lib/sdk'
-import { DataTable } from './components'
+import { JobsTable } from './components'
 
 import styles from './styles/app.module.css'
 
@@ -30,7 +30,7 @@ export class App extends React.Component {
         {status === 'error' && 'Error connecting to Saasify'}
         {status === 'ready' && (
           <>
-            <DataTable />
+            <JobsTable />
           </>
         )}
       </div>
