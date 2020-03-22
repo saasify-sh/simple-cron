@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Put, Query, Route, Header } from 'tsoa'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Query,
+  Route,
+  Header
+} from 'tsoa'
 import { CronJob, CronJobCreateRequest, CronJobUpdateRequest } from './types'
 
 import * as db from './db'
@@ -46,6 +56,20 @@ export class CronJobController extends Controller {
     return job
   }
 
+  @Delete(`/{jobId}`)
+  public async removeJob(
+    jobId: string,
+    @Header('x-saasify-user') userId: string
+  ): Promise<CronJob> {
+    console.log('removeJob', { jobId, userId })
+
+    const doc = await db.CronJobs.doc(jobId)
+    const job = await db.get<CronJob>(doc, userId)
+    await doc.delete()
+
+    return job
+  }
+
   @Get()
   public async listJobs(
     @Query() offset: number = 0,
@@ -73,6 +97,7 @@ export class CronJobController extends Controller {
 
     const doc = await db.CronJobs.doc(jobId)
     const snapshot = await doc.get()
+
     if (snapshot.exists) {
       const data = snapshot.data()
 

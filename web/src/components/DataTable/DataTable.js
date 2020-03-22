@@ -16,11 +16,11 @@ const columns = [
     dataIndex: 'name',
     render: (id) => <b>{id}</b>
   },
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    render: (id) => <i>{id}</i>
-  },
+  // {
+  //   title: 'ID',
+  //   dataIndex: 'id',
+  //   render: (id) => <i>{id}</i>
+  // },
   {
     title: 'Created',
     dataIndex: 'createdAt',
@@ -68,8 +68,7 @@ export class DataTable extends Component {
       pageSize: 25
     },
     loading: true,
-    isOpenAddNewJobModal: false,
-    isLoadingAddNewJobModal: false
+    isOpenAddNewJobModal: false
   }
 
   componentDidMount() {
@@ -78,13 +77,7 @@ export class DataTable extends Component {
 
   render() {
     const { className, ...rest } = this.props
-    const {
-      data,
-      pagination,
-      loading,
-      isOpenAddNewJobModal,
-      isLoadingAddNewJobModal
-    } = this.state
+    const { data, pagination, loading, isOpenAddNewJobModal } = this.state
 
     return (
       <Paper className={cs(styles.body, className)} {...rest}>
