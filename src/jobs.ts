@@ -10,9 +10,15 @@ import {
   Route,
   Header
 } from 'tsoa'
-import { CronJob, CronJobCreateRequest, CronJobUpdateRequest } from './types'
+import {
+  CronJob,
+  CronJobCreateRequest,
+  CronJobUpdateRequest,
+  LogEntry
+} from './types'
 
 import * as db from './db'
+import * as logs from './logs'
 import * as scheduler from './scheduler'
 
 @Route('/jobs')
@@ -78,9 +84,9 @@ export class CronJobController extends Controller {
 
   @Get()
   public async listJobs(
+    @Header('x-saasify-user') userId: string,
     @Query() offset: number = 0,
-    @Query() limit: number = 100,
-    @Header('x-saasify-user') userId: string
+    @Query() limit: number = 100
   ): Promise<CronJob[]> {
     console.log('listJobs', { offset, limit, userId })
 
@@ -133,5 +139,21 @@ export class CronJobController extends Controller {
       message: 'Not found',
       status: 404
     }
+  }
+
+  @Get(`/{jobId}/logs`)
+  public async listJobLogs(
+    jobId: string,
+    @Header('x-saasify-user') userId: string,
+    @Query() limit: number = 10
+    // @Query() pageToken?: string
+  ): Promise<LogEntry[]> {
+    console.log('listJobLogs', { jobId, userId })
+
+    const doc = db.CronJobs.doc(jobId)
+    const job = await db.get<CronJob>(doc, userId)
+    console.log({ job })
+
+    return logs.getJobLogs(job, { limit })
   }
 }

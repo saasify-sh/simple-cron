@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute } from 'tsoa';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { CronJobController } from './cron';
+import { CronJobController } from './jobs';
 import * as KoaRouter from 'koa-router';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -89,6 +89,13 @@ const models: TsoaRoute.Models = {
     "additionalProperties": true,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  "LogEntry": {
+    "dataType": "refObject",
+    "properties": {
+    },
+    "additionalProperties": { "dataType": "any" },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -165,9 +172,9 @@ export function RegisterRoutes(router: KoaRouter) {
   router.get('/jobs',
     async (context: any, next: any) => {
       const args = {
+        userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
         offset: { "default": 0, "in": "query", "name": "offset", "dataType": "double" },
         limit: { "default": 100, "in": "query", "name": "limit", "dataType": "double" },
-        userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
       };
 
       let validatedArgs: any[] = [];
@@ -203,6 +210,28 @@ export function RegisterRoutes(router: KoaRouter) {
       const controller = new CronJobController();
 
       const promise = controller.updateJob.apply(controller, validatedArgs as any);
+      return promiseHandler(controller, promise, context, next);
+    });
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  router.get('/jobs/:jobId/logs',
+    async (context: any, next: any) => {
+      const args = {
+        jobId: { "in": "path", "name": "jobId", "required": true, "dataType": "string" },
+        userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
+        limit: { "default": 10, "in": "query", "name": "limit", "dataType": "double" },
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, context);
+      } catch (error) {
+        context.status = error.status;
+        context.throw(error.status, JSON.stringify({ fields: error.fields }));
+      }
+
+      const controller = new CronJobController();
+
+      const promise = controller.listJobLogs.apply(controller, validatedArgs as any);
       return promiseHandler(controller, promise, context, next);
     });
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

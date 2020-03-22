@@ -1,5 +1,5 @@
 import './bootstrap'
-import './cron'
+import './jobs'
 
 import * as http from 'http'
 import * as Koa from 'koa'

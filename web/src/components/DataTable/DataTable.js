@@ -28,11 +28,6 @@ export class DataTable extends Component {
       dataIndex: 'name',
       render: (id) => <b>{id}</b>
     },
-    // {
-    //   title: 'ID',
-    //   dataIndex: 'id',
-    //   render: (id) => <i>{id}</i>
-    // },
     {
       title: 'Created',
       dataIndex: 'createdAt',

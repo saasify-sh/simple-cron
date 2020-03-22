@@ -10,6 +10,10 @@ export interface HttpHeaders {
   [key: string]: string
 }
 
+export interface LogEntry {
+  [key: string]: any
+}
+
 export type CronJobState = 'enabled' | 'disabled' | 'paused'
 export type CronJobRunStatus = 'pending' | 'success' | 'failure'
 export type HttpMethod =
@@ -91,3 +95,7 @@ export interface CronJob extends Model {
 //   status: CronJobRunStatus
 //   httpStatus: number
 // }
+
+export interface LogOptions {
+  limit?: number
+}
