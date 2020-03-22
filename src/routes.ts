@@ -33,8 +33,8 @@ const models: TsoaRoute.Models = {
   "HttpStatus": {
     "dataType": "refObject",
     "properties": {
-      "code": { "dataType": "double" },
-      "message": { "dataType": "string" },
+      "code": { "dataType": "double", "required": true },
+      "message": { "dataType": "string", "required": true },
     },
     "additionalProperties": true,
   },

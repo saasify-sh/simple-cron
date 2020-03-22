@@ -50,8 +50,8 @@ export interface Model {
 }
 
 export interface HttpStatus {
-  code?: number
-  message?: string
+  code: number
+  message: string
 }
 
 export interface CronJob extends Model {

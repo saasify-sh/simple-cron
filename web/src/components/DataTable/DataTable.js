@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import cs from 'classnames'
+import cronstrue from 'cronstrue'
 
 import { format } from 'date-fns'
-import { Button, Divider, Modal, Table, Tag, message, notification } from 'antd'
+import {
+  Button,
+  Divider,
+  Modal,
+  Table,
+  Tag,
+  Tooltip,
+  message,
+  notification
+} from 'antd'
 
 import { Paper } from '../Paper/Paper'
 import { NewJobForm } from '../NewJobForm/NewJobForm'
@@ -26,11 +36,24 @@ export class DataTable extends Component {
     {
       title: 'Created',
       dataIndex: 'createdAt',
-      render: (timestamp) => format(new Date(timestamp), 'MM/dd/yyyy')
+      render: (timestamp) => (
+        <Tooltip
+          title={format(new Date(timestamp), 'MM/dd/yyyy HH:mm:ss OOOO')}
+        >
+          {format(new Date(timestamp), 'MM/dd/yyyy')}
+        </Tooltip>
+      )
     },
     {
       title: 'Schedule',
-      dataIndex: 'schedule'
+      dataIndex: 'schedule',
+      render: (schedule, job) => (
+        <Tooltip
+          title={`${cronstrue.toString(schedule)} (${job.timezone} timezone)`}
+        >
+          {schedule}
+        </Tooltip>
+      )
     },
     {
       title: 'URL',
@@ -60,6 +83,24 @@ export class DataTable extends Component {
             return <Tag color='purple'>Unknown</Tag>
         }
       }
+    },
+    {
+      title: 'Last Run',
+      dataIndex: 'lastAttemptTime',
+      render: (timestamp) =>
+        timestamp ? (
+          <Tooltip
+            title={format(new Date(timestamp), 'MM/dd/yyyy HH:mm:ss OOOO')}
+          >
+            {format(new Date(timestamp), 'MM/dd/yyyy')}
+          </Tooltip>
+        ) : null
+    },
+    {
+      title: 'Result',
+      dataIndex: 'status',
+      render: (status) =>
+        status ? <Tooltip title={status.message}>{status.code}</Tooltip> : null
     },
     {
       title: 'Actions',

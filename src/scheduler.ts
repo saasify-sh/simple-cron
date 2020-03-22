@@ -100,14 +100,14 @@ export function enrichJob(
   if (schedulerJob.lastAttemptTime) {
     job.lastAttemptTime = new Date(
       +schedulerJob.lastAttemptTime.seconds * 1000 +
-        +schedulerJob.lastAttemptTime.nanos * 10000
+        +schedulerJob.lastAttemptTime.nanos / 10000
     )
   }
 
   if (schedulerJob.scheduleTime) {
     job.nextAttemptTime = new Date(
       +schedulerJob.scheduleTime.seconds * 1000 +
-        +schedulerJob.scheduleTime.nanos * 10000
+        +schedulerJob.scheduleTime.nanos / 10000
     )
   }
 

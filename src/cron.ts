@@ -89,12 +89,15 @@ export class CronJobController extends Controller {
       .limit(limit)
       .get()
 
+    console.log('results', docs.length)
     const jobs = docs.map((doc) => db.getSnapshot<CronJob>(doc))
 
     return pMap(
       jobs,
       async (job) => {
+        console.time(`scheduler.getJob(${job.id})`)
         const schedulerJob = await scheduler.getJob(job)
+        console.timeEnd(`scheduler.getJob(${job.id})`)
         return scheduler.enrichJob(job, schedulerJob)
       },
       {
