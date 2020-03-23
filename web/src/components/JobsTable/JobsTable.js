@@ -59,11 +59,13 @@ export class JobsTable extends Component {
       title: 'URL',
       dataIndex: 'url',
       ellipsis: true,
-      width: '20em',
+      width: '12em',
       render: (url) => (
-        <a href={url} target='_blank' rel='noopener noreferrer'>
-          {url}
-        </a>
+        <Tooltip title={url}>
+          <a href={url} target='_blank' rel='noopener noreferrer'>
+            {url}
+          </a>
+        </Tooltip>
       )
     },
     {
