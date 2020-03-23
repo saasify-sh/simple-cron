@@ -217,12 +217,14 @@ export class JobsTable extends Component {
           )}
         </Modal>
 
-        <RemoveJobModal
-          isOpen={isOpenRemoveJobModal}
-          job={selectedJob}
-          onCancel={this._onCloseRemoveJobModal}
-          onDone={this._onDoneRemoveJobModal}
-        />
+        {isOpenRemoveJobModal && (
+          <RemoveJobModal
+            isOpen={isOpenRemoveJobModal}
+            job={selectedJob}
+            onCancel={this._onCloseRemoveJobModal}
+            onDone={this._onDoneRemoveJobModal}
+          />
+        )}
       </div>
     )
   }
