@@ -175,7 +175,12 @@ export class JobsTable extends Component {
         <h1 className={styles.title}>Scheduled Jobs</h1>
 
         <div className={styles.actions}>
-          <Button type='secondary' icon='reload' onClick={this._onRefresh}>
+          <Button
+            type='secondary'
+            icon='reload'
+            loading={loading}
+            onClick={this._onRefresh}
+          >
             Refresh
           </Button>
 

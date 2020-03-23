@@ -84,7 +84,12 @@ export class JobLogsTable extends Component {
         <h1 className={styles.title}>Job Logs - {match.params.jobId}</h1>
 
         <div className={styles.actions}>
-          <Button type='secondary' icon='reload' onClick={this._onRefresh}>
+          <Button
+            type='secondary'
+            icon='reload'
+            loading={loading}
+            onClick={this._onRefresh}
+          >
             Refresh
           </Button>
         </div>
