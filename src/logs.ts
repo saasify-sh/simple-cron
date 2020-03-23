@@ -4,9 +4,9 @@ import pick = require('lodash.pick')
 import * as types from './types'
 
 const logEntryTypeAttemptFinished =
-  'entry.data.type.googleapis.com/google.cloud.scheduler.logging.AttemptFinished'
+  'type.googleapis.com/google.cloud.scheduler.logging.AttemptFinished'
 const logEntryTypeAttemptStarted =
-  'entry.data.type.googleapis.com/google.cloud.scheduler.logging.AttemptStarted'
+  'type.googleapis.com/google.cloud.scheduler.logging.AttemptStarted'
 
 const client = new Logging()
 
@@ -28,15 +28,14 @@ function encodeLogEntry(entry: Entry, job: types.CronJob): types.LogEntry {
   const metadata = pick(entry.metadata, [
     'timestamp',
     'severity',
-    'httpRequest',
-    'timestamp'
+    'httpRequest'
   ])
 
   const { url, statusMessage } = entry.data
   const type = entry.data['@type']
   let status = null
 
-  if (type === logEntryTypeAttemptFinished) {
+  if (type == logEntryTypeAttemptFinished) {
     status = {
       message: statusMessage,
       code: metadata.httpRequest ? metadata.httpRequest.status : undefined
@@ -45,18 +44,19 @@ function encodeLogEntry(entry: Entry, job: types.CronJob): types.LogEntry {
     if (!status.message && status.code === 200) {
       status.message = 'OK'
     }
-  } else if (type === logEntryTypeAttemptStarted) {
+  } else if (type == logEntryTypeAttemptStarted) {
     status = {
       message: 'Attempt started'
     }
   }
 
   return {
+    id: entry.metadata.insertId,
     jobId: job.id,
     userId: job.userId,
     httpMethod: job.httpMethod,
-    ...metadata,
     url,
-    status
+    status,
+    ...metadata
   }
 }

@@ -3,6 +3,8 @@ import cs from 'classnames'
 import cronstrue from 'cronstrue'
 
 import { format } from 'date-fns'
+import { Link } from 'react-router-dom'
+import { ObjectInspector } from 'react-inspector'
 import {
   Button,
   Divider,
@@ -14,7 +16,6 @@ import {
   notification
 } from 'antd'
 
-import { Paper } from '../Paper/Paper'
 import { NewJobForm } from '../NewJobForm/NewJobForm'
 import { RemoveJobModal } from '../RemoveJobModal/RemoveJobModal'
 import { sdk } from '../../lib/sdk'
@@ -51,17 +52,19 @@ export class JobsTable extends Component {
       )
     },
     {
+      title: 'Method',
+      dataIndex: 'httpMethod'
+    },
+    {
       title: 'URL',
       dataIndex: 'url',
+      ellipsis: true,
+      width: '20em',
       render: (url) => (
         <a href={url} target='_blank' rel='noopener noreferrer'>
           {url}
         </a>
       )
-    },
-    {
-      title: 'Method',
-      dataIndex: 'httpMethod'
     },
     {
       title: 'Status',
@@ -95,27 +98,45 @@ export class JobsTable extends Component {
       title: 'Result',
       dataIndex: 'status',
       render: (status) =>
-        status ? <Tooltip title={status.message}>{status.code}</Tooltip> : null
+        status ? (
+          <Tooltip title={status.message}>
+            {status.code !== 200 ? <b>{status.code}</b> : status.code}
+          </Tooltip>
+        ) : null
+    },
+    {
+      title: 'Logs',
+      render: (text, record) => <Link to={`/${record.id}`}>View Logs</Link>
     },
     {
       title: 'Actions',
       render: (_, job) => (
         <span>
           {job.state === 'enabled' && (
-            <a onClick={() => this._onUpdateJob(job, { state: 'paused' })}>
+            <a
+              onClick={(event) =>
+                this._onUpdateJob(event, job, { state: 'paused' })
+              }
+            >
               Pause
             </a>
           )}
 
           {job.state === 'paused' && (
-            <a onClick={() => this._onUpdateJob(job, { state: 'enabled' })}>
+            <a
+              onClick={(event) =>
+                this._onUpdateJob(event, job, { state: 'enabled' })
+              }
+            >
               Resume
             </a>
           )}
 
           <Divider type='vertical' />
 
-          <a onClick={() => this._onOpenRemoveJobModal(job)}>Delete</a>
+          <a onClick={(event) => this._onOpenRemoveJobModal(event, job)}>
+            Delete
+          </a>
         </span>
       )
     }
@@ -124,7 +145,7 @@ export class JobsTable extends Component {
   state = {
     data: [],
     pagination: {
-      pageSize: 25
+      pageSize: 10
     },
     loading: true,
     isOpenAddNewJobModal: false,
@@ -137,7 +158,7 @@ export class JobsTable extends Component {
   }
 
   render() {
-    const { className, ...rest } = this.props
+    const { className } = this.props
     const {
       data,
       pagination,
@@ -148,10 +169,14 @@ export class JobsTable extends Component {
     } = this.state
 
     return (
-      <Paper className={cs(styles.body, className)} {...rest}>
-        <h2 className={styles.title}>Scheduled Jobs</h2>
+      <div className={cs(styles.body, className)}>
+        <h1 className={styles.title}>Scheduled Jobs</h1>
 
-        <div style={{ alignSelf: 'flex-end', marginBottom: '1em' }}>
+        <div className={styles.actions}>
+          <Button type='secondary' icon='reload' onClick={this._onRefresh}>
+            Refresh
+          </Button>
+
           <Button
             type='primary'
             className={styles.addJobButton}
@@ -168,6 +193,14 @@ export class JobsTable extends Component {
           pagination={pagination}
           loading={loading}
           onChange={this._handleTableChange}
+          expandedRowRender={this._renderExpandedRow}
+          onRow={(record, rowIndex) => {
+            return {
+              onClick: () => {
+                this.props.history.push(`/${record.id}`)
+              }
+            }
+          }}
         />
 
         <Modal
@@ -190,8 +223,12 @@ export class JobsTable extends Component {
           onCancel={this._onCloseRemoveJobModal}
           onDone={this._onDoneRemoveJobModal}
         />
-      </Paper>
+      </div>
     )
+  }
+
+  _renderExpandedRow = (record) => {
+    return <ObjectInspector data={record} name='Job' expandLevel={2} />
   }
 
   _handleTableChange = (pagination, filters, sorter) => {
@@ -200,7 +237,6 @@ export class JobsTable extends Component {
     this.setState({ pagination: pager })
 
     this._fetch({
-      results: pagination.pageSize,
       page: pagination.current,
       sortField: sorter.field,
       sortOrder: sorter.order,
@@ -221,7 +257,7 @@ export class JobsTable extends Component {
     if (!params.page || offset >= data.length) {
       this.setState({ loading: true })
 
-      const params = { limit: pagination.pageSize, offset }
+      const params = { limit: 25, offset }
 
       try {
         const { body: items } = await sdk.api.get('/jobs', {
@@ -251,12 +287,16 @@ export class JobsTable extends Component {
     }
   }
 
+  _onRefresh = () => {
+    this._fetch({ reset: true })
+  }
+
   _onOpenAddNewJobModal = () => {
     this.setState({ isOpenAddNewJobModal: true })
   }
 
   _onDoneAddNewJobModal = () => {
-    this._fetch({ reset: true })
+    this._onRefresh()
     this._onCloseAddNewJobModal()
   }
 
@@ -264,12 +304,13 @@ export class JobsTable extends Component {
     this.setState({ isOpenAddNewJobModal: false })
   }
 
-  _onOpenRemoveJobModal = (job) => {
+  _onOpenRemoveJobModal = (event, job) => {
+    event.stopPropagation()
     this.setState({ isOpenRemoveJobModal: true, selectedJob: job })
   }
 
   _onDoneRemoveJobModal = () => {
-    this._fetch({ reset: true })
+    this._onRefresh()
     this._onCloseRemoveJobModal()
   }
 
@@ -277,14 +318,15 @@ export class JobsTable extends Component {
     this.setState({ isOpenRemoveJobModal: false })
   }
 
-  _onUpdateJob = (job, data) => {
+  _onUpdateJob = (event, job, data) => {
+    event.stopPropagation()
     this.setState({ loading: true })
 
     sdk.api
       .put(`/jobs/${job.id}`, { data })
       .then(() => {
         message.success('Job updated')
-        this._fetch({ reset: true })
+        this._onRefresh()
       })
       .catch((err) => {
         console.error(err)

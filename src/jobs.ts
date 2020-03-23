@@ -145,7 +145,7 @@ export class CronJobController extends Controller {
   public async listJobLogs(
     jobId: string,
     @Header('x-saasify-user') userId: string,
-    @Query() limit: number = 10
+    @Query() limit: number = 25
     // @Query() pageToken?: string
   ): Promise<LogEntry[]> {
     console.log('listJobLogs', { jobId, userId })

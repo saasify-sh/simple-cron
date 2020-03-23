@@ -24,9 +24,7 @@ export async function createJob(job: types.CronJob): Promise<Scheduler.IJob> {
 export async function getJob(job: types.CronJob): Promise<Scheduler.IJob> {
   const name = getSchedulerJobName(job)
 
-  const jobResult = await client.getJob({
-    name
-  })
+  const jobResult = await client.getJob({ name })
 
   return jobResult[0]
 }
@@ -34,17 +32,26 @@ export async function getJob(job: types.CronJob): Promise<Scheduler.IJob> {
 export async function deleteJob(job: types.CronJob): Promise<void> {
   const name = getSchedulerJobName(job)
 
-  await client.deleteJob({
-    name
-  })
+  await client.deleteJob({ name })
 }
 
 export async function updateJob(job: types.CronJob): Promise<Scheduler.IJob> {
-  const jobResult = await client.updateJob({
-    job: cronJobToSchedulerJob(job)
-  })
+  const name = getSchedulerJobName(job)
+  let jobResult
 
-  return jobResult[0]
+  if (job.state === 'paused') {
+    jobResult = await client.pauseJob({ name })
+  } else if (job.state === 'enabled') {
+    jobResult = await client.resumeJob({ name })
+  } else if (job.state === 'disabled') {
+    await client.pauseJob({ name })
+
+    jobResult = await client.updateJob({
+      job: cronJobToSchedulerJob(job)
+    })[0]
+  }
+
+  return jobResult
 }
 
 function getSchedulerJobName(job: types.CronJob): string {

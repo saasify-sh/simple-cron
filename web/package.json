@@ -16,6 +16,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-inspector": "^5.0.1",
+    "react-router-dom": "^5.1.2",
     "saasify-sdk": "^1.16.1"
   },
   "devDependencies": {
