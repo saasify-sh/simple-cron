@@ -35,7 +35,7 @@ cron
 serverless cron
 cloud cron
 easy cron
-cronic
+simple-cron
 simple cron
 
 ## Related

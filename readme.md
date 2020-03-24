@@ -2,12 +2,12 @@
 
 > Dead simple cron service for making HTTP calls on a regular schedule.
 
-[![Build Status](https://travis-ci.com/saasify-sh/cronic.svg?branch=master)](https://travis-ci.com/saasify-sh/cronic) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.com/saasify-sh/simple-cron.svg?branch=master)](https://travis-ci.com/saasify-sh/simple-cron) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Features
 
 - 💯 **Open source**
-- 🙈 [Hosted version](https://cronic.saasify.sh) provided by [Saasify](https://saasify.sh)
+- 🙈 [Hosted version](https://simple-cron.saasify.sh) provided by [Saasify](https://saasify.sh)
 - 🙉 Self-hosted version is easy to set up
 - 🐳 Built on top of Google Cloud [Scheduler](https://cloud.google.com/scheduler) and [Firestore](https://cloud.google.com/firestore)
 - 💪 Scales "infinitely" via serverless magic
@@ -49,7 +49,7 @@ export CRONIC_USER=nala
 All of the following examples use [httpie](https://httpie.org), a modern alternative to `curl`. They're just normal HTTP REST calls, so feel free to replace them with your preferred REST language / client.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/cronic/master/media/cron-syntax.png" alt="Cron expression syntax" width="480" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/cron-syntax.png" alt="Cron expression syntax" width="480" />
 </p>
 
 ```bash
@@ -117,9 +117,9 @@ For demonstration purposes, we've included an example of deploying to [ZEIT now]
 Assuming you have `now` set up locally, you will need to initialize the required environment variables first.
 
 ```bash
-now secret add -- cronic-google-project-id "XXX"
-now secret add -- cronic-google-project-location "XXX"
-now secret add -- cronic-google-application-credentials "`base64 /path/to/service-account.json`"
+now secret add -- simple-cron-google-project-id "XXX"
+now secret add -- simple-cron-google-project-location "XXX"
+now secret add -- simple-cron-google-application-credentials "`base64 /path/to/service-account.json`"
 ```
 
 Note that the `base64` encoding is a [workaround](https://github.com/zeit/now/issues/749) because the serverless environment won't be able to access the filesystem.

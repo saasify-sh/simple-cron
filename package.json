@@ -1,9 +1,9 @@
 {
-  "name": "cronic",
+  "name": "simple-cron",
   "version": "0.1.0",
   "private": true,
   "description": "Dead simple cron service.",
-  "repository": "saasify-sh/cronic",
+  "repository": "saasify-sh/simple-cron",
   "author": "Saasify <dev@saasify.sh>",
   "license": "MIT",
   "engines": {
@@ -22,7 +22,7 @@
     "test": "run-s build",
     "deploy": "now",
     "predeploy": "run-s build",
-    "postdeploy": "now rm --safe cronic"
+    "postdeploy": "now rm --safe simple-cron"
   },
   "dependencies": {
     "@google-cloud/firestore": "^3.5.1",

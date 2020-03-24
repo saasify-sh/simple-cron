@@ -1,9 +1,9 @@
 {
   "version": 2,
   "env": {
-    "GOOGLE_APPLICATION_CREDENTIALS": "@cronic-google-application-credentials",
-    "GOOGLE_PROJECT_ID": "@cronic-google-project-id",
-    "GOOGLE_PROJECT_LOCATION": "@cronic-google-project-location"
+    "GOOGLE_APPLICATION_CREDENTIALS": "@simple-cron-google-application-credentials",
+    "GOOGLE_PROJECT_ID": "@simple-cron-google-project-id",
+    "GOOGLE_PROJECT_LOCATION": "@simple-cron-google-project-location"
   },
   "builds": [{ "src": "build/server.js", "use": "@now/node" }],
   "routes": [{ "src": ".*", "dest": "build/server.js" }]

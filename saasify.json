@@ -1,6 +1,6 @@
 {
-  "name": "cronic",
-  "alias": "cronic",
+  "name": "simple-cron",
+  "alias": "simple-cron",
   "openapi": "./dist/swagger.json",
   "services": [
     {
@@ -37,7 +37,7 @@
     "name": "Cronic",
     "heading": "Cloud Cron Jobs",
     "subheading": "The simplest and most robust cloud cron service for scheduling HTTP calls. Open source, scalable, simple.",
-    "repo": "https://github.com/saasify-sh/cronic",
+    "repo": "https://github.com/saasify-sh/simple-cron",
     "theme": {
       "name": "waves",
       "buttonStyle": "rounded",
