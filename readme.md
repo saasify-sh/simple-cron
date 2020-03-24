@@ -1,4 +1,4 @@
-# Cronic
+# Simple Cron
 
 > Dead simple cron service for making HTTP calls on a regular schedule.
 
@@ -42,8 +42,8 @@ yarn start
 Now let's set up some useful environment variables for the following examples. We'll be using the local dev server and a fake user named `nala` (my wonderful kitty 😻).
 
 ```bash
-export CRONIC_URL=http://localhost:4000
-export CRONIC_USER=nala
+export SIMPLE_CRON_URL=http://localhost:4000
+export SIMPLE_CRON_USER=nala
 ```
 
 All of the following examples use [httpie](https://httpie.org), a modern alternative to `curl`. They're just normal HTTP REST calls, so feel free to replace them with your preferred REST language / client.
@@ -54,7 +54,7 @@ All of the following examples use [httpie](https://httpie.org), a modern alterna
 
 ```bash
 # Create a new job that will send a GET request to example.com once every minute
-http POST ${CRONIC_URL}/jobs schedule='* * * * *' url='https://example.com' x-saasify-user:${CRONIC_USER}
+http POST ${SIMPLE_CRON_URL}/jobs schedule='* * * * *' url='https://example.com' x-saasify-user:${SIMPLE_CRON_USER}
 ```
 
 There are two required parameters: `schedule` and `url`.
@@ -93,19 +93,19 @@ Here are some of the ways you can manage your job:
 
 ```bash
 # Get the job via its id
-http GET ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER}
+http GET ${SIMPLE_CRON_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${SIMPLE_CRON_USER}
 
 # Pause the job
-http PUT ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER} state=paused
+http PUT ${SIMPLE_CRON_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${SIMPLE_CRON_USER} state=paused
 
 # Resume the job
-http PUT ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER} state=enabled
+http PUT ${SIMPLE_CRON_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${SIMPLE_CRON_USER} state=enabled
 
 # Disable the job
-http PUT ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER} state=disabled
+http PUT ${SIMPLE_CRON_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${SIMPLE_CRON_USER} state=disabled
 
 # Delete the job
-http DELETE ${CRONIC_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${CRONIC_USER}
+http DELETE ${SIMPLE_CRON_URL}/jobs/sEfyx6mm2d9smI0xltYI x-saasify-user:${SIMPLE_CRON_USER}
 ```
 
 ## Deploy
