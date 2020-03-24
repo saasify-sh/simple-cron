@@ -36,7 +36,7 @@
   "saas": {
     "name": "Simple Cron",
     "heading": "Cloud Cron Jobs",
-    "subheading": "The simplest cloud cron service for making HTTP calls on a regular schedule. Open source, scalable, simple.",
+    "subheading": "The simplest cloud cron service to make HTTP calls on a regular schedule. Open source, scalable, simple.",
     "repo": "https://github.com/saasify-sh/simple-cron",
     "theme": {
       "name": "waves",

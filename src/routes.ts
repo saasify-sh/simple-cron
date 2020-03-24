@@ -218,7 +218,7 @@ export function RegisterRoutes(router: KoaRouter) {
       const args = {
         jobId: { "in": "path", "name": "jobId", "required": true, "dataType": "string" },
         userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
-        limit: { "default": 10, "in": "query", "name": "limit", "dataType": "double" },
+        limit: { "default": 25, "in": "query", "name": "limit", "dataType": "double" },
       };
 
       let validatedArgs: any[] = [];

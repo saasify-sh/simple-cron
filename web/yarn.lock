@@ -3496,6 +3496,11 @@ cron-validator@^1.1.1:
   resolved "https://registry.yarnpkg.com/cron-validator/-/cron-validator-1.1.1.tgz#0a27bb75508c7bc03c8b840d2d9f170eeacb5615"
   integrity sha512-vfZb05w/wezuwPZBDvdIBmJp2BvuJExHeyKRa5oBqD2ZDXR61hb3QgPc/3ZhBEQJlAy8Jlnn5XC/JCT3IDqxwg==
 
+cronstrue@^1.92.0:
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/cronstrue/-/cronstrue-1.92.0.tgz#3547fd0950cca488f3edd321d14376dcd1db59f0"
+  integrity sha512-AKptYmOJVXlxkzmHH6HTYJyuOr6t8FHHl4GJ+19yVLN7fMXRyNg3g67CzqdVYSWxaR2A4iOqvfxM/dsuyJpH9A==
+
 cross-spawn@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.1.tgz#0ab56286e0f7c24e153d04cc2aa027e43a9a5d14"
