@@ -46,7 +46,7 @@
     },
     "webapp": {
       "url": "https://simple-cron-webapp.now.sh",
-      "devUrl": "http://localhost:4000"
+      "devUrl": "http://localhost:7000"
     }
   }
 }
