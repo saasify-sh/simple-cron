@@ -43,6 +43,10 @@
       "buttonStyle": "rounded",
       "color": "#ff6e6c",
       "codeBlockDark": true
+    },
+    "webapp": {
+      "url": "https://simple-cron-webapp.now.sh",
+      "devUrl": "http://localhost:4000"
     }
   }
 }
