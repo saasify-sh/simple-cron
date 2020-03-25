@@ -90,10 +90,12 @@ export class CronJobController extends Controller {
   ): Promise<CronJob[]> {
     console.log('listJobs', { offset, limit, userId })
 
+    console.time('listJobs db.CronJobs.where')
     const { docs } = await db.CronJobs.where('userId', '==', userId)
       .offset(offset)
       .limit(limit)
       .get()
+    console.timeEnd('listJobs db.CronJobs.where')
 
     console.log('results', docs.length)
     const jobs = docs.map((doc) => db.getSnapshot<CronJob>(doc))
