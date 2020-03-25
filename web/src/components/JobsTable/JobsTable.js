@@ -201,13 +201,6 @@ export class JobsTable extends Component {
           loading={loading}
           onChange={this._handleTableChange}
           expandedRowRender={this._renderExpandedRow}
-          onRow={(record, rowIndex) => {
-            return {
-              onClick: () => {
-                this.props.history.push(`/${record.id}`)
-              }
-            }
-          }}
         />
 
         <Modal
