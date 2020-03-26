@@ -1,8 +1,9 @@
+import grpc = require('grpc')
 import * as firestore from '@google-cloud/firestore'
 
 import * as types from './types'
 
-export const db = new firestore.Firestore()
+export const db = new firestore.Firestore({ grpc })
 export const CronJobs = db.collection('cron-jobs')
 
 export async function get<T extends types.Model>(

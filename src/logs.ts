@@ -1,3 +1,4 @@
+import grpc = require('grpc')
 import { Logging, Entry } from '@google-cloud/logging'
 import pick = require('lodash.pick')
 
@@ -8,7 +9,7 @@ const logEntryTypeAttemptFinished =
 const logEntryTypeAttemptStarted =
   'type.googleapis.com/google.cloud.scheduler.logging.AttemptStarted'
 
-const client = new Logging()
+const client = new Logging({ grpc: grpc as any })
 
 export async function getJobLogs(
   job: types.CronJob,

@@ -30,6 +30,7 @@
     "@google-cloud/scheduler": "^1.6.0",
     "@koa/cors": "^3.0.0",
     "dotenv": "^8.2.0",
+    "grpc": "^1.24.2",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-compress": "^3.0.0",
