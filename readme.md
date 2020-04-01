@@ -10,7 +10,7 @@
 - 🙈 [Hosted version](https://simple-cron.saasify.sh) provided by [Saasify](https://saasify.sh)
 - 🙉 Self-hosted version is easy to set up
 - 🐳 Built on top of Google Cloud [Scheduler](https://cloud.google.com/scheduler) and [Firestore](https://cloud.google.com/firestore)
-- 💪 Scales "infinitely" via serverless magic
+- 💪 Scales "infinitely" via serverless magics
 - 👤 Users can only manage the jobs they own
 - 🤖 Includes an auto-generated OpenAPI spec
 - 👍 Super simple -- Google does all the hard work for us
@@ -158,14 +158,11 @@ If you get permission denied errors along the way, don't worry -- you're in good
 
 Just double check to make sure these APIs are enabled in your Google cloud console and that the service account you're using has the correct roles. If the errors still happen, try waiting a few minutes for the permissions to propagate which ended up working for me.
 
-## Inspiration
+## Related
 
 - [EasyCron](https://www.easycron.com/) - Solid hosted cron service (not open source).
 - [Hosted cron services](https://www.cronjobservices.com) - Collection of hosted cron service providers.
-
-## SaaS
-
-[Saasify](https://saasify.sh) makes it easy to monetize these types of APIs.
+- [Saasify](https://saasify.sh) makes it easy to monetize these types of services.
 
 ## License
 
