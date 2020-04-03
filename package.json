@@ -37,6 +37,7 @@
     "koa-router": "^8.0.8",
     "lodash.pick": "^4.4.0",
     "p-map": "^4.0.0",
+    "saasify-provider-sdk": "^1.18.1",
     "tsoa": "^2.5.13"
   },
   "devDependencies": {

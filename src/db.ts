@@ -43,3 +43,17 @@ export function getSnapshot<T extends types.Model>(
     updatedAt: snapshot.updateTime.toDate()
   } as T
 }
+
+export async function getUserJobDocs({ userId, offset = 0, limit = null }) {
+  let query = CronJobs.where('userId', '==', userId)
+
+  if (offset) {
+    query = query.offset(offset)
+  }
+
+  if (limit) {
+    query = query.limit(limit)
+  }
+
+  return query.get()
+}

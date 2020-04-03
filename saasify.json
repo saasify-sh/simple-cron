@@ -45,9 +45,87 @@
       "codeBlockDark": true,
       "backgroundImage": "https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2549&q=80"
     },
+    "sections": {
+      "pricing": {
+        "showMeteredBilling": false
+      },
+      "hero": {
+        "cta": "Get started for free"
+      }
+    },
     "webapp": {
       "url": "https://simple-cron-webapp.now.sh",
       "devUrl": "http://localhost:7000"
     }
-  }
+  },
+  "pricingPlans": [
+    {
+      "name": "Free",
+      "rateLimit": null,
+      "metrics": [
+        {
+          "slug": "jobs",
+          "usageType": "licensed",
+          "amount": 0
+        }
+      ],
+      "features": ["1 free cron job per month", "Unlimited calls per cron job"]
+    },
+    {
+      "name": "Pro",
+      "amount": 499,
+      "rateLimit": null,
+      "metrics": [
+        {
+          "slug": "jobs",
+          "usageType": "licensed",
+          "billingScheme": "tiered",
+          "tiersMode": "graduated",
+          "tiers": [
+            {
+              "upTo": 5,
+              "flatAmount": 0
+            },
+            {
+              "upTo": "inf",
+              "unitAmount": 99
+            }
+          ]
+        }
+      ],
+      "features": [
+        "5 cron jobs per month",
+        "Additional cron jobs are $0.99 per job",
+        "Unlimited calls per cron job"
+      ]
+    },
+    {
+      "name": "Business",
+      "amount": 2999,
+      "rateLimit": null,
+      "metrics": [
+        {
+          "slug": "jobs",
+          "usageType": "licensed",
+          "billingScheme": "tiered",
+          "tiersMode": "graduated",
+          "tiers": [
+            {
+              "upTo": 50,
+              "flatAmount": 0
+            },
+            {
+              "upTo": "inf",
+              "unitAmount": 99
+            }
+          ]
+        }
+      ],
+      "features": [
+        "50 cron jobs per month",
+        "Additional cron jobs are $0.99 per job",
+        "Unlimited calls per cron job"
+      ]
+    }
+  ]
 }

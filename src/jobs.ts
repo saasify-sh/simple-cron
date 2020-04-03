@@ -20,13 +20,15 @@ import {
 import * as db from './db'
 import * as logs from './logs'
 import * as scheduler from './scheduler'
+import * as billing from './billing'
 
 @Route('/jobs')
 export class CronJobController extends Controller {
   @Post()
   public async createJob(
     @Body() body: CronJobCreateRequest,
-    @Header('x-saasify-user') userId: string
+    @Header('x-saasify-user') userId: string,
+    @Header('x-saasify-plan') plan: string
   ): Promise<CronJob> {
     console.log('createJob', { body, userId })
 
@@ -41,6 +43,12 @@ export class CronJobController extends Controller {
       userId,
       state: 'enabled'
     }
+
+    await billing.updateUsage({
+      userId,
+      plan,
+      delta: 1
+    })
 
     const doc = await db.CronJobs.add(data)
     const job = await db.get<CronJob>(doc, userId)
@@ -71,12 +79,19 @@ export class CronJobController extends Controller {
   @Delete(`/{jobId}`)
   public async removeJob(
     jobId: string,
-    @Header('x-saasify-user') userId: string
+    @Header('x-saasify-user') userId: string,
+    @Header('x-saasify-plan') plan: string
   ): Promise<void> {
     console.log('removeJob', { jobId, userId })
 
     const doc = db.CronJobs.doc(jobId)
     const job = await db.get<CronJob>(doc, userId)
+
+    await billing.updateUsage({
+      userId,
+      plan,
+      delta: -1
+    })
 
     await scheduler.deleteJob(job)
     await doc.delete()
@@ -91,10 +106,7 @@ export class CronJobController extends Controller {
     console.log('listJobs', { offset, limit, userId })
 
     console.time('listJobs db.CronJobs.where')
-    const { docs } = await db.CronJobs.where('userId', '==', userId)
-      .offset(offset)
-      .limit(limit)
-      .get()
+    const { docs } = await db.getUserJobDocs({ userId, offset, limit })
     console.timeEnd('listJobs db.CronJobs.where')
 
     console.log('results', docs.length)
