@@ -14,7 +14,7 @@ export const updateUsage = async ({ userId, plan, delta }) => {
   const quantity = size + delta
 
   if (plan === 'free') {
-    if (quantity >= 1) {
+    if (quantity >= 1 && delta >= 0) {
       throw {
         message: 'Please upgrade your subscription to add more jobs.',
         status: 402
