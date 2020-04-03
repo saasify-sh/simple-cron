@@ -111,6 +111,7 @@ export function RegisterRoutes(router: KoaRouter) {
       const args = {
         body: { "in": "body", "name": "body", "required": true, "ref": "CronJobCreateRequest" },
         userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
+        plan: { "in": "header", "name": "x-saasify-plan", "required": true, "dataType": "string" },
       };
 
       let validatedArgs: any[] = [];
@@ -153,6 +154,7 @@ export function RegisterRoutes(router: KoaRouter) {
       const args = {
         jobId: { "in": "path", "name": "jobId", "required": true, "dataType": "string" },
         userId: { "in": "header", "name": "x-saasify-user", "required": true, "dataType": "string" },
+        plan: { "in": "header", "name": "x-saasify-plan", "required": true, "dataType": "string" },
       };
 
       let validatedArgs: any[] = [];

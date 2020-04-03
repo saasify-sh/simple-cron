@@ -3,7 +3,8 @@
   "env": {
     "GOOGLE_APPLICATION_CREDENTIALS": "@simple-cron-google-application-credentials",
     "GOOGLE_PROJECT_ID": "@simple-cron-google-project-id",
-    "GOOGLE_PROJECT_LOCATION": "@simple-cron-google-project-location"
+    "GOOGLE_PROJECT_LOCATION": "@simple-cron-google-project-location",
+    "SAASIFY_PROVIDER_TOKEN": "@simple-cron-saasify-provider-token"
   },
   "builds": [{ "src": "build/server.js", "use": "@now/node" }],
   "routes": [{ "src": ".*", "dest": "build/server.js" }]

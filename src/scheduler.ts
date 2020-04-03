@@ -1,7 +1,8 @@
+import grpc = require('grpc')
 import { URL } from 'url'
 import * as scheduler from '@google-cloud/scheduler'
 
-import * as grpc from './grpc'
+import * as grpcUtils from './grpc-utils'
 import * as types from './types'
 
 import Scheduler = scheduler.protos.google.cloud.scheduler.v1
@@ -9,7 +10,7 @@ import Scheduler = scheduler.protos.google.cloud.scheduler.v1
 const projectId = process.env.GOOGLE_PROJECT_ID
 const projectLocation = process.env.GOOGLE_PROJECT_LOCATION
 
-const client = new scheduler.CloudSchedulerClient()
+const client = new scheduler.CloudSchedulerClient({ grpc: grpc as any })
 const parent = client.locationPath(projectId, projectLocation)
 
 export async function createJob(job: types.CronJob): Promise<Scheduler.IJob> {
@@ -119,7 +120,7 @@ export function enrichJob(
   }
 
   if (schedulerJob.status) {
-    job.status = grpc.convertCode(schedulerJob.status.code)
+    job.status = grpcUtils.convertCode(schedulerJob.status.code)
   }
 
   return job
