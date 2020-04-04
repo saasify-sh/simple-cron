@@ -1,24 +1,36 @@
 # Simple Cron
 
+Simple Cron is a dead simple cloud service to make HTTP calls on a regular schedule. It is named after the classic UNIX Cron program which allowed you to schedule jobs to be run locally.
+
+Some common use cases for cron jobs include:
+
+- Monitoring uptime of websites or services
+- Sending out reports or emails once a week
+- Kicking off a backup process once a day
+- Running workflows on a regular schedule
+- Powering bots to automate social media
+
 ## Dashboard
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/dashboard.png" alt="Simple Cron Dashboard" />
 </p>
 
-The dashboard lists all of your currently enabled and paused cron jobs. Click `Create New Job` to add your first cloud cron job for free.
+Once you sign in, the dashboard lists all of your currently enabled and paused cron jobs.
 
-For each job, the dashboard lists metadata and current status, the result of the job's last run, and gives you options to manage the job.
+For each job, the dashboard lists metadata, current status, the result of the job's last run, and gives you options to manage the job.
 
 You can pause, resume, and permanently delete jobs. You can also view detailed information about a job including the result of its last run and logs for all past runs.
 
 ## Creating New Jobs
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/jobs/create-new-job.png" alt="Create new job dialog" width="420" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/create-new-job.png" alt="Create new job dialog" width="420" />
 </p>
 
-To create a new cloud cron job, you need to enter three required fields:
+From the dashboard, select `Add New Job` to add your first cloud cron job for free.
+
+You'll need to enter three required fields:
 
 - `Name` - A short recognizable name describing this job.
 - `Schedule` - A standard cron syntax expression specifying the schedule for this job. (See below for more info on cron syntax)
@@ -34,7 +46,7 @@ Upon creating a new job, it will begin executing automatically according to its 
 ## Upgrading
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/jobs/error-creating-job.png" alt="Error creating job" width="256" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/error-creating-job.png" alt="Error creating job" width="300" />
 </p>
 
 If you get an error when you try to create a new job, then you've run out of free jobs and will need to [upgrade your account](/pricing) to continue.
@@ -45,7 +57,7 @@ If you get an error when you try to create a new job, then you've run out of fre
   <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/cron-syntax.png" alt="Cron expression syntax" width="420" />
 </p>
 
-Simple Cron uses classic cron syntax to schedule cloud cron jobs to make HTTP calls on a regular schedule.
+Simple Cron uses classic UNIX cron syntax to schedule cloud cron jobs to make HTTP calls on a regular schedule.
 
 Here are some common examples to get you started.
 
@@ -91,3 +103,19 @@ Pricing for the API is the same as using the dashboard:
 - You're billed based on the number of cron jobs you use.
 - Cron jobs have no limit to the number of executions they're allowed to run.
 - You're allowed one free cron job with an unlimited number of executions per month.
+
+## Roadmap
+
+In the near future, we'll be adding support for:
+
+- Email notifications for job failures
+- Slack notifications for job failures
+- Webhook notifications for job failures
+- Customizable HTTP bodies for PUT and POST requests
+- Customizable HTTP headers
+- Customizable retry logic
+- Customizable timezone support
+- Customizable success / fail logic
+- Job analytics over time
+
+Have a use cases or feature request not listed here? Please don't hesitate to [email us](mailto:support@saasify.sh).
