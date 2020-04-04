@@ -36,8 +36,10 @@
   "saas": {
     "name": "Simple Cron",
     "heading": "Cloud Cron Jobs",
-    "subheading": "Dead simple cron service for making HTTP calls on a regular schedule. Open source, scalable, simple.",
+    "subheading": "Dead simple cron service for making HTTP calls on a regular schedule. Open source, simple, and scalable.",
     "repo": "https://github.com/saasify-sh/simple-cron",
+    "logo": "media/logo.svg",
+    "favicon": "media/favicon.ico",
     "theme": {
       "name": "waves",
       "buttonStyle": "rounded",
@@ -56,7 +58,44 @@
     "webapp": {
       "url": "https://simple-cron-webapp.now.sh",
       "devUrl": "http://localhost:7000"
-    }
+    },
+    "features": [
+      {
+        "name": "Simple setup",
+        "desc": "Easy to get started with unlimited HTTP calls for one free cron job.",
+        "icon": "media/icons/setup.svg"
+      },
+      {
+        "name": "Simple pricing",
+        "desc": "Using Stripe based on the number of cron jobs you create with unlimited calls per job.",
+        "icon": "media/icons/stripe.svg"
+      },
+      {
+        "name": "Customizable",
+        "desc": "You can customize HTTP method, headers, query params, and request bodies.",
+        "icon": "media/icons/customizable.svg"
+      },
+      {
+        "name": "Detailed logs",
+        "desc": "Logs for all jobs are accessible forever.",
+        "icon": "media/icons/logs.svg"
+      },
+      {
+        "name": "Reliable delivery",
+        "desc": "Enterprise-grade reliability for cron jobs built on Google Cloud. Guaranteed at-least-once delivery to your job targets.",
+        "icon": "media/icons/cluster.svg"
+      },
+      {
+        "name": "Rigorously tested",
+        "desc": "Simple Cron currently handles over 100k calls per day to servers around the world.",
+        "icon": "media/icons/global.svg"
+      },
+      {
+        "name": "Open Source",
+        "desc": "Easy to set up your own self-hosted version via our [open source repo](https://github.com/saasify-sh/simple-cron).",
+        "icon": "media/icons/open-source.svg"
+      }
+    ]
   },
   "pricingPlans": [
     {

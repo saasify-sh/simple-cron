@@ -154,6 +154,10 @@ export class NewJobForm extends Component {
               description: err?.response?.data?.error || err.message,
               duration: 10
             })
+
+            if (err?.response?.status === 402) {
+              this.props.onCancel()
+            }
           })
       }
     })
