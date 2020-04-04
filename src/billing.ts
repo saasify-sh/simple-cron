@@ -2,11 +2,19 @@ import SaasifyProviderSDK = require('saasify-provider-sdk')
 
 import * as db from './db'
 
-const sdk = new SaasifyProviderSDK({
-  token: process.env.SAASIFY_PROVIDER_TOKEN
-})
+const token = process.env.SAASIFY_PROVIDER_TOKEN
+
+const sdk = token ? new SaasifyProviderSDK({ token }) : null
 
 export const updateUsage = async ({ userId, plan, delta }) => {
+  if (!sdk) {
+    console.warn(
+      'We recommend you configure "SAASIFY_PROVIDER_TOKEN" to report usage to Saasify.'
+    )
+
+    return
+  }
+
   console.time('updateUsage getUserJobDocs')
   const { size } = await db.getUserJobDocs({ userId })
   console.timeEnd('updateUsage getUserJobDocs')
