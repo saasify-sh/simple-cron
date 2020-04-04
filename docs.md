@@ -31,6 +31,14 @@ You may also specify a few optional fields:
 
 Upon creating a new job, it will begin executing automatically according to its schedule. If you expect a job to have run, you can refresh the dashboard and view its logs to ensure everything it working properly.
 
+## Upgrading
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/jobs/error-creating-job.png" alt="Error creating job" width="256" />
+</p>
+
+If you get an error when you try to create a new job, then you've run out of free jobs and will need to [upgrade your account](/pricing) to continue.
+
 ## Cron Syntax
 
 <p align="center">
@@ -73,3 +81,13 @@ From the dashboard, you can click `View Logs` on any job to view the full histor
 </p>
 
 From the Job Logs screen, you can click the `+` icon to the left of any call log to view its full JSON metadata in detail.
+
+## REST API
+
+In addition to the dashboard UI, all of Simple Cron's functionality is easily accessible via a straightforward REST API.
+
+Pricing for the API is the same as using the dashboard:
+
+- You're billed based on the number of cron jobs you use.
+- Cron jobs have no limit to the number of executions they're allowed to run.
+- You're allowed one free cron job with an unlimited number of executions per month.
