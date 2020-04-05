@@ -1,6 +1,6 @@
 {
   "name": "simple-cron",
-  "alias": "simple-cron",
+  "alias": "simplecron.dev",
   "openapi": "./dist/swagger.json",
   "services": [
     {
