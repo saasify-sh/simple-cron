@@ -93,6 +93,11 @@
         "icon": "media/icons/global.svg"
       },
       {
+        "name": "Powerful API",
+        "desc": "Create and manage cron jobs programatically via our [REST API](/docs#section/API).",
+        "icon": "media/icons/api.svg"
+      },
+      {
         "name": "Open Source",
         "desc": "Easy to set up your own self-hosted version via our [open source repo](https://github.com/saasify-sh/simple-cron).",
         "icon": "media/icons/open-source.svg"
