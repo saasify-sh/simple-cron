@@ -54,7 +54,8 @@
       },
       "hero": {
         "cta": "Get started for free"
-      }
+      },
+      "demo": false
     },
     "webapp": {
       "url": "https://simple-cron-webapp.now.sh",
