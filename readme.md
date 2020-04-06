@@ -1,13 +1,13 @@
 # Simple Cron
 
-> Dead simple cron service for making HTTP calls on a regular schedule.
+> [Dead simple cron service](https://simplecron.dev) for making HTTP calls on a regular schedule.
 
 [![Build Status](https://travis-ci.com/saasify-sh/simple-cron.svg?branch=master)](https://travis-ci.com/saasify-sh/simple-cron) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Features
 
 - 💯 **Open source**
-- 🙈 [Hosted version](https://simple-cron.saasify.sh) provided by [Saasify](https://saasify.sh)
+- 🙈 [Hosted version](https://simplecron.dev) provided by [Saasify](https://saasify.sh)
 - 🙉 Self-hosted version is easy to set up
 - 🐳 Built on top of Google Cloud [Scheduler](https://cloud.google.com/scheduler) and [Firestore](https://cloud.google.com/firestore)
 - 💪 Scales "infinitely" via serverless magics
@@ -148,7 +148,7 @@ You need to enable the Google Cloud Scheduler API in your cloud console and then
 
 You need to create a new [Google service account](https://cloud.google.com/docs/authentication/getting-started), assign the correct roles, and then download the resulting `json` key file.
 
-The roles I used are `Cloud Scheduler Admin`, `Cloud Scheduler Service Agent`, `Firebase Admin`, `Firebase Develop Admin`, and `Firebase Admin SDK Administrator Service Agent`.
+The roles I used are `Cloud Scheduler Admin`, `Cloud Scheduler Service Agent`, `Firebase Admin`, `Firebase Develop Admin`, and `Firebase Admin SDK Administrator Service Agent`. You may need to add additional roles for optional functionality such as logging and monitoring.
 
 These roles are a bit of a black box and I'm sure it would work with less roles, but this worked for me. If you figure out the minimal set of roles needed, please open an issue to let me know.
 
