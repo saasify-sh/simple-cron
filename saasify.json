@@ -79,7 +79,7 @@
       },
       {
         "name": "Notifications",
-        "desc": "One click to enable email and slack notifications for job failures.",
+        "desc": "One click to enable **email** and **slack** notifications for job failures.",
         "icon": "media/icons/notifications.svg"
       },
       {

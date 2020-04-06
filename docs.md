@@ -41,6 +41,13 @@ You may also specify a few optional fields:
 - `Description` - A longer description of the job.
 - `HTTP Method` - The HTTP method to use when pinging the target `HTTP URL`. Defaults to `GET` but you may use any valid HTTP method.
 
+The following notification channels are available for job failures:
+
+- `Email` - Email address for notifications related to this job.
+- `Slack URL` - Slack webhook URL for notifications related to this job.
+  - Follow this [guide](https://api.slack.com/tutorials/slack-apps-hello-world) to create a new Slack App with an incoming webhook that will post to a specific workspace and channel.
+  - Your incoming webhook URL should resemble `https://hooks.slack.com/services/XXX/YYY/ZZZZZZZZ`.
+
 Upon creating a new job, it will begin executing automatically according to its schedule. If you expect a job to have run, you can refresh the dashboard and view its logs to ensure everything it working properly.
 
 ## Upgrading
@@ -108,14 +115,13 @@ Pricing for the API is the same as using the dashboard:
 
 In the near future, we'll be adding support for:
 
-- Email notifications for job failures
-- Slack notifications for job failures
 - Webhook notifications for job failures
 - Customizable HTTP bodies for PUT and POST requests
 - Customizable HTTP headers
 - Customizable retry logic
 - Customizable timezone support
 - Customizable success / fail logic
+- More control over notifications
 - Job analytics over time
 
 Have a use cases or feature request not listed here? Please don't hesitate to [email us](mailto:support@saasify.sh).
