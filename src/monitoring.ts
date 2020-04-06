@@ -1,5 +1,6 @@
 import grpc = require('grpc')
 import * as monitoring from '@google-cloud/monitoring'
+import * as monitoringTypes from '@google-cloud/monitoring/protos/protos'
 import * as types from './types'
 
 const alertClient = new monitoring.AlertPolicyServiceClient({
@@ -14,27 +15,12 @@ const metricName = 'logging.googleapis.com/user/simple-cron-job-errors'
 const notificationChannelName =
   'projects/saasify/notificationChannels/6071543916583820227'
 
-export async function createAlert(job: types.CronJob): Promise<void> {
-  if (!job.email) {
-    return
-  }
-
+export async function createAlert(
+  job: types.CronJob
+): Promise<monitoringTypes.google.monitoring.v3.AlertPolicy> {
   const projectId = await alertClient.getProjectId()
   const projectPath = alertClient.projectPath(projectId)
 
-  // const notificationChannel = (
-  //   await notificationClient.createNotificationChannel({
-  //     name: projectPath,
-  //     notificationChannel: {
-  //       type: 'webhook',
-  //       labels: {
-  //         email_address: job.email
-  //       }
-  //     }
-  //   })
-  // )[0]
-
-  // console.log({ notificationChannel })
   const filter = `
     metric.type = "${metricName}" AND 
     metric.labels.job_id = "${job.id}" AND
@@ -77,6 +63,15 @@ export async function createAlert(job: types.CronJob): Promise<void> {
     })
   )[0]
 
-  console.log({ alertPolicy })
   return alertPolicy
+}
+
+export async function deleteAlert(job: types.CronJob): Promise<void> {
+  if (!job.alertPolicy) {
+    return
+  }
+
+  await alertClient.deleteAlertPolicy({
+    name: job.alertPolicy
+  })
 }

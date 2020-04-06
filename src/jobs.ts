@@ -58,7 +58,9 @@ export class CronJobController extends Controller {
     const schedulerJob = await scheduler.createJob(job)
     console.log({ schedulerJob })
 
-    await monitoring.createAlert(job)
+    const alertPolicy = await monitoring.createAlert(job)
+    console.log({ alertPolicy })
+    await doc.update({ alertPolicy: alertPolicy.name })
 
     return scheduler.enrichJob(job, schedulerJob)
   }
@@ -97,6 +99,7 @@ export class CronJobController extends Controller {
     })
 
     await scheduler.deleteJob(job)
+    await monitoring.deleteAlert(job)
     await doc.delete()
   }
 

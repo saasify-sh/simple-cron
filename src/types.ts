@@ -87,13 +87,7 @@ export interface CronJob extends Model {
   email?: string
   slackWebhookUrl?: string
 
-  // numRunsSuccess: number
-  // numRunsFailure: number
-
-  // TODO
-  // slack stuff
-  // email stuff
-  // webhook stuff
+  alertPolicy?: string
 }
 
 // export interface CronJobRun {
