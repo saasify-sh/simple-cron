@@ -140,7 +140,7 @@ export class NewJobForm extends Component {
           })(<Input placeholder='Notification email' />)}
         </Form.Item>
 
-        <Form.Item label='Slack Webhook URL' {...formItemLayout}>
+        <Form.Item label='Slack URL' {...formItemLayout}>
           {getFieldDecorator('slackWebhookUrl', {
             rules: [
               {
@@ -159,7 +159,7 @@ export class NewJobForm extends Component {
                 }
               }
             ]
-          })(<Input placeholder='Slack notification webhook URL' />)}
+          })(<Input placeholder='Slack webhook URL' />)}
         </Form.Item>
 
         <div className={styles.footer}>

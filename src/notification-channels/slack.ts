@@ -31,8 +31,11 @@ ${emojiLabel}*Simple Cron Job Failure ${stateLabel}*
 Job Name: *${job.name}*
 Job ID: \`${job.id}\`
 
+
 HTTP status: *${job.status?.code}*
 HTTP message: *${job.status?.message}*
+HTTP url: ${job.url}
+HTTP method: ${job.httpMethod}
 Last attempt time: ${formatDate(job.lastAttemptTime)}
 Next attempt time: ${formatDate(job.nextAttemptTime)}
 
