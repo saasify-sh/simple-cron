@@ -78,6 +78,11 @@
         "icon": "media/icons/customizable.svg"
       },
       {
+        "name": "Notifications",
+        "desc": "One click to enable email and slack notifications for job failures.",
+        "icon": "media/icons/notifications.svg"
+      },
+      {
         "name": "Detailed logs",
         "desc": "Logs for all jobs are stored and remain accessible forever.",
         "icon": "media/icons/logs.svg"

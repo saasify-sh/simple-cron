@@ -146,6 +146,17 @@ export class NewJobForm extends Component {
               {
                 type: 'url',
                 message: 'Please enter a valid URL.'
+              },
+              {
+                validator: (rule, value, cb) => {
+                  if (!value.startsWith('https://hooks.slack.com/services/')) {
+                    return cb(
+                      'Please enter a valid Slack webhook URL: https://hooks.slack.com/services/...'
+                    )
+                  } else {
+                    return cb()
+                  }
+                }
               }
             ]
           })(<Input placeholder='Slack notification webhook URL' />)}

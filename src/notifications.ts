@@ -55,9 +55,8 @@ export const handler = async (ctx: Koa.Context) => {
   //   id: 'foo',
   //   lastAttemptTime: new Date(),
   //   nextAttemptTime: new Date(),
-  //   slackWebhookUrl:
-  //     'https://hooks.slack.com/services/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',
-  //   email: 'fisch0920@gmail.com',
+  //   slackWebhookUrl: 'TODO',
+  //   email: 'travis@saasify.sh',
   //   status: {
   //     code: 500,
   //     message: 'Internal Kitty Error'

@@ -62,6 +62,7 @@ const models: TsoaRoute.Models = {
       "status": { "ref": "HttpStatus" },
       "email": { "dataType": "string" },
       "slackWebhookUrl": { "dataType": "string" },
+      "alertPolicy": { "dataType": "string" },
     },
     "additionalProperties": true,
   },
