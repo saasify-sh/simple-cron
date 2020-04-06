@@ -53,7 +53,7 @@ Upon creating a new job, it will begin executing automatically according to its 
 ## Upgrading
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/error-creating-job.png" alt="Error creating job" width="300" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/error-creating-job.png" alt="Error creating job" width="360" />
 </p>
 
 If you get an error when you try to create a new job, then you've run out of free jobs and will need to [upgrade your account](/pricing) to continue.
