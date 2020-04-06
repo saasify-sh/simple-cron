@@ -3,7 +3,16 @@ import PropTypes from 'prop-types'
 import cs from 'classnames'
 import { isValidCron } from 'cron-validator'
 
-import { Button, Form, Icon, Input, Select, Tooltip, notification } from 'antd'
+import {
+  Button,
+  Divider,
+  Form,
+  Icon,
+  Input,
+  Select,
+  Tooltip,
+  notification
+} from 'antd'
 import { sdk } from '../../lib/sdk'
 
 import styles from './styles.module.css'
@@ -117,6 +126,30 @@ export class NewJobForm extends Component {
         </Form.Item>
 
         {/* TODO: add httpHeaders, httpBody, and httpQuery */}
+
+        <Divider />
+
+        <Form.Item label='Email' {...formItemLayout}>
+          {getFieldDecorator('email', {
+            rules: [
+              {
+                type: 'email',
+                message: 'Please enter a valid email.'
+              }
+            ]
+          })(<Input placeholder='Notification email' />)}
+        </Form.Item>
+
+        <Form.Item label='Slack Webhook URL' {...formItemLayout}>
+          {getFieldDecorator('slackWebhookUrl', {
+            rules: [
+              {
+                type: 'url',
+                message: 'Please enter a valid URL.'
+              }
+            ]
+          })(<Input placeholder='Slack notification webhook URL' />)}
+        </Form.Item>
 
         <div className={styles.footer}>
           <Button onClick={this.props.onCancel}>Cancel</Button>

@@ -64,12 +64,12 @@
     "features": [
       {
         "name": "Simple setup",
-        "desc": "Easy to get started with unlimited HTTP calls for one free cron job.",
+        "desc": "Easy to get started with unlimited HTTP calls for one **free** cron job.",
         "icon": "media/icons/setup.svg"
       },
       {
         "name": "Simple pricing",
-        "desc": "Using Stripe based on the number of cron jobs you create with unlimited calls per job.",
+        "desc": "Based on the number of cron jobs you create with **unlimited calls per job**.",
         "icon": "media/icons/stripe.svg"
       },
       {
@@ -79,7 +79,7 @@
       },
       {
         "name": "Detailed logs",
-        "desc": "Logs for all jobs are accessible forever.",
+        "desc": "Logs for all jobs are stored and remain accessible forever.",
         "icon": "media/icons/logs.svg"
       },
       {

@@ -9,6 +9,7 @@ import * as gzip from 'koa-compress'
 import * as cors from '@koa/cors'
 
 import { RegisterRoutes } from './routes'
+import * as notifications from './notifications'
 
 const port = process.env.PORT || 4000
 
@@ -17,9 +18,18 @@ app.use(cors())
 app.use(bodyParser())
 app.use(gzip())
 
+app.use(async (ctx, next) => {
+  console.log(ctx.request.url, ctx.request.method)
+
+  await next()
+})
+
 // tsoa magic
 const router = new KoaRouter()
 RegisterRoutes(router)
+
+router.post('/notification', notifications.handler)
+
 app.use(router.routes()).use(router.allowedMethods())
 
 process.on('uncaughtException', (err) => {

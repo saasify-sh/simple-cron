@@ -39,6 +39,10 @@ export interface CronJobCreateRequest {
   name?: string
   description?: string
   tags?: string[]
+
+  // notifications
+  email?: string
+  slackWebhookUrl?: string
 }
 
 export interface CronJobUpdateRequest {
@@ -79,6 +83,9 @@ export interface CronJob extends Model {
   nextAttemptTime?: Date
 
   status?: HttpStatus
+
+  email?: string
+  slackWebhookUrl?: string
 
   // numRunsSuccess: number
   // numRunsFailure: number

@@ -5,6 +5,7 @@ import * as db from './db'
 const token = process.env.SAASIFY_PROVIDER_TOKEN
 
 const sdk = token ? new SaasifyProviderSDK({ token }) : null
+const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
 
 export const updateUsage = async ({ userId, plan, delta }) => {
   if (!sdk) {
@@ -18,14 +19,20 @@ export const updateUsage = async ({ userId, plan, delta }) => {
   console.time('updateUsage getUserJobDocs')
   const { size } = await db.getUserJobDocs({ userId })
   console.timeEnd('updateUsage getUserJobDocs')
+  console.log('updateUsage', { userId, plan, delta, size })
 
-  const quantity = size + delta
+  const quantity = Math.max(0, size + delta)
 
   if (plan === 'free') {
-    if (quantity >= 1 && delta >= 0) {
-      throw {
-        message: 'Please upgrade your subscription to add more jobs.',
-        status: 402
+    if (quantity > 1 && delta >= 0) {
+      if (isDev) {
+        console.error('warning: disabling subscription limits')
+        return
+      } else {
+        throw {
+          message: 'Please upgrade your subscription to add more jobs.',
+          status: 402
+        }
       }
     }
   } else {

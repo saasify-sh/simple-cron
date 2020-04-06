@@ -4,7 +4,9 @@
     "GOOGLE_APPLICATION_CREDENTIALS": "@simple-cron-google-application-credentials",
     "GOOGLE_PROJECT_ID": "@simple-cron-google-project-id",
     "GOOGLE_PROJECT_LOCATION": "@simple-cron-google-project-location",
-    "SAASIFY_PROVIDER_TOKEN": "@simple-cron-saasify-provider-token"
+    "SAASIFY_PROVIDER_TOKEN": "@simple-cron-saasify-provider-token",
+    "MAILGUN_API_KEY": "@simple-cron-mailgun-api-key",
+    "MAILGUN_DOMAIN": "@simple-cron-mailgun-domain"
   },
   "builds": [{ "src": "build/server.js", "use": "@now/node" }],
   "routes": [{ "src": ".*", "dest": "build/server.js" }]

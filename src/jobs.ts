@@ -19,6 +19,7 @@ import {
 
 import * as db from './db'
 import * as logs from './logs'
+import * as monitoring from './monitoring'
 import * as scheduler from './scheduler'
 import * as billing from './billing'
 
@@ -56,6 +57,8 @@ export class CronJobController extends Controller {
 
     const schedulerJob = await scheduler.createJob(job)
     console.log({ schedulerJob })
+
+    await monitoring.createAlert(job)
 
     return scheduler.enrichJob(job, schedulerJob)
   }
