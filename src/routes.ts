@@ -57,6 +57,7 @@ const models: TsoaRoute.Models = {
       "description": { "dataType": "string", "required": true },
       "tags": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
       "state": { "dataType": "enum", "enums": ["enabled", "disabled", "paused"], "required": true },
+      "timestamp": { "dataType": "datetime" },
       "lastAttemptTime": { "dataType": "datetime" },
       "nextAttemptTime": { "dataType": "datetime" },
       "status": { "ref": "HttpStatus" },

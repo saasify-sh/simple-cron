@@ -79,6 +79,7 @@ export interface CronJob extends Model {
 
   state: CronJobState
 
+  timestamp?: Date
   lastAttemptTime?: Date
   nextAttemptTime?: Date
 

@@ -40,6 +40,7 @@ export class CronJobController extends Controller {
       name: 'Default',
       description: '',
       tags: [],
+      timestamp: Date.now(),
       ...body,
       userId,
       state: 'enabled'
@@ -112,7 +113,15 @@ export class CronJobController extends Controller {
     console.log('listJobs', { offset, limit, userId })
 
     console.time('listJobs db.CronJobs.where')
-    const { docs } = await db.getUserJobDocs({ userId, offset, limit })
+    const { docs } = await db.getUserJobDocs({
+      userId,
+      offset,
+      limit,
+      orderBy: {
+        key: 'timestamp',
+        direction: 'desc'
+      }
+    })
     console.timeEnd('listJobs db.CronJobs.where')
 
     console.log('results', docs.length)

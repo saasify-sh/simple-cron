@@ -149,7 +149,10 @@ export class NewJobForm extends Component {
               },
               {
                 validator: (rule, value, cb) => {
-                  if (!value.startsWith('https://hooks.slack.com/services/')) {
+                  if (
+                    value &&
+                    !value.startsWith('https://hooks.slack.com/services/')
+                  ) {
                     return cb(
                       'Please enter a valid Slack webhook URL: https://hooks.slack.com/services/...'
                     )

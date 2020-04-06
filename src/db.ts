@@ -44,7 +44,12 @@ export function getSnapshot<T extends types.Model>(
   } as T
 }
 
-export async function getUserJobDocs({ userId, offset = 0, limit = null }) {
+export async function getUserJobDocs({
+  userId,
+  offset = 0,
+  limit = null,
+  orderBy = null
+}) {
   let query = CronJobs.where('userId', '==', userId)
 
   if (offset) {
@@ -53,6 +58,10 @@ export async function getUserJobDocs({ userId, offset = 0, limit = null }) {
 
   if (limit) {
     query = query.limit(limit)
+  }
+
+  if (orderBy) {
+    query = query.orderBy(orderBy.key, orderBy.direction)
   }
 
   return query.get()
