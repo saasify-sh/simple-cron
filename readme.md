@@ -1,6 +1,6 @@
 # Simple Cron
 
-> [Dead simple cron service](https://simplecron.dev) for making HTTP calls on a regular schedule.
+> Dead simple cron service for making HTTP calls on a regular schedule. ([link](https://simplecron.dev))
 
 [![Build Status](https://travis-ci.com/saasify-sh/simple-cron.svg?branch=master)](https://travis-ci.com/saasify-sh/simple-cron) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
