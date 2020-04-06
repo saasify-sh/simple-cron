@@ -25,7 +25,7 @@ You can pause, resume, and permanently delete jobs. You can also view detailed i
 ## Creating New Jobs
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/create-new-job.png" alt="Create new job dialog" width="420" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/create-new-job.png" alt="Create new job dialog" width="441" />
 </p>
 
 From the dashboard, select `Add New Job` to add your first cloud cron job for free.
@@ -53,7 +53,7 @@ Upon creating a new job, it will begin executing automatically according to its 
 ## Upgrading
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/error-creating-job.png" alt="Error creating job" width="360" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/error-creating-job.png" alt="Error creating job" width="412" />
 </p>
 
 If you get an error when you try to create a new job, then you've run out of free jobs and will need to [upgrade your account](/pricing) to continue.
@@ -124,4 +124,4 @@ In the near future, we'll be adding support for:
 - More control over notifications
 - Job analytics over time
 
-Have a use cases or feature request not listed here? Please don't hesitate to [email us](mailto:support@saasify.sh).
+Have a use case or feature request not listed here? Please don't hesitate to [email us](mailto:support@saasify.sh).
