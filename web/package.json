@@ -6,7 +6,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "deploy": "now --prod",
+    "postdeploy": "now rm --safe simple-cron-webapp"
   },
   "dependencies": {
     "antd": "^3.26.6",
@@ -19,7 +21,7 @@
     "react-dom": "^16.13.1",
     "react-inspector": "^5.0.1",
     "react-router-dom": "^5.1.2",
-    "saasify-sdk": "^1.17.4"
+    "saasify-sdk": "^1.18.11"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",

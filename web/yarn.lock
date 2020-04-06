@@ -10153,21 +10153,21 @@ rxjs@^6.5.3:
   dependencies:
     tslib "^1.9.0"
 
-saasify-faas-sdk@^1.17.4:
-  version "1.17.4"
-  resolved "https://registry.yarnpkg.com/saasify-faas-sdk/-/saasify-faas-sdk-1.17.4.tgz#92fb8c46db775456f3ab141441b0ed0d181c415a"
-  integrity sha512-KMrzI5CAxfoPqNv56VEs1eUBbTWot2SeRgI4KIlMXeobhd+It0sZWqe6oZ7oCQFubuQiGT/jHdgHYg3xL9zXnw==
+saasify-faas-sdk@^1.18.11:
+  version "1.18.11"
+  resolved "https://registry.yarnpkg.com/saasify-faas-sdk/-/saasify-faas-sdk-1.18.11.tgz#2af665b247db2607c9a35074fb43c7058fc93eb8"
+  integrity sha512-2Pjs1Q49Fq8wW21Di/Qz1SjpEiSDv1oili9KtX5Pcn7AfnY9Go5+XDxgjs7RD7TIhwLsDkou4XJDsbEtxIW47w==
   dependencies:
     axios "^0.19.0"
     content-type "^1.0.4"
     qs "^6.9.1"
 
-saasify-sdk@^1.17.4:
-  version "1.17.4"
-  resolved "https://registry.yarnpkg.com/saasify-sdk/-/saasify-sdk-1.17.4.tgz#b1699931ed5cc6553856f1d39db0a29f95402720"
-  integrity sha512-/2SzF66T3f4KBIro1tXyXC4INml9iH40di0Yu8UAI8IHp1SV7UBorrE2Nhkwung0GWLEmX5XWPWoBYnzCjuuAQ==
+saasify-sdk@^1.18.11:
+  version "1.18.11"
+  resolved "https://registry.yarnpkg.com/saasify-sdk/-/saasify-sdk-1.18.11.tgz#5108e3c87764e130d7113e68a80e18e8482b2bd3"
+  integrity sha512-niFylDPdLimOs/G+aX+jXkVqG+EvEfW569wqEtYpeqtJ+aJOjCjxZ348oMdyoXWkeNjnq6bq6MxmlTcJHT90KA==
   dependencies:
-    saasify-faas-sdk "^1.17.4"
+    saasify-faas-sdk "^1.18.11"
 
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
