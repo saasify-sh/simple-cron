@@ -111,7 +111,7 @@ export class NewJobForm extends Component {
           )}
         </Form.Item>
 
-        <Divider>HTTP Target</Divider>
+        <Divider />
 
         <Form.Item label='HTTP URL' {...formItemLayout}>
           {getFieldDecorator('url', {
@@ -146,7 +146,7 @@ export class NewJobForm extends Component {
 
         {/* TODO: add httpHeaders, httpBody, and httpQuery */}
 
-        <Divider onClick={this._onToggleNotifications}>Notifications</Divider>
+        <Divider />
 
         {/* <div
           className={cs(

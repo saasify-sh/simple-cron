@@ -7,10 +7,6 @@ const alertClient = new monitoring.AlertPolicyServiceClient({
   grpc: grpc as any
 })
 
-// const notificationClient = new monitoring.NotificationChannelServiceClient({
-//   grpc: grpc as any
-// })
-
 const metricName = 'logging.googleapis.com/user/simple-cron-job-errors'
 const notificationChannelName =
   'projects/saasify/notificationChannels/6071543916583820227'
@@ -29,6 +25,7 @@ export async function createAlert(
 
   console.log({ filter })
 
+  // TODO: this needs to be more customizable
   const alertPolicy = (
     await alertClient.createAlertPolicy({
       name: projectPath,
@@ -52,7 +49,7 @@ export async function createAlert(
               // },
               // aggregations: [
               //   {
-              //     alignmentPeriod: '60s',
+              //     alignmentPeriod: { seconds: 60, nanos: 0 },
               //     perSeriesAligner: 'ALIGN_RATE'
               //   }
               // ]

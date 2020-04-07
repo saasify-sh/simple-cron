@@ -25,7 +25,7 @@ You can pause, resume, and permanently delete jobs. You can also view detailed i
 ## Creating New Jobs
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/create-new-job.png" alt="Create new job dialog" width="441" />
+  <img src="https://raw.githubusercontent.com/saasify-sh/simple-cron/master/media/docs/create-new-job-2.png" alt="Create new job dialog" width="538" />
 </p>
 
 From the dashboard, select `Add New Job` to add your first cloud cron job for free.
