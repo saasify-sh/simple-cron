@@ -34,8 +34,8 @@ You can customize a cron job with the following options:
 
 - `Name` - A short recognizable name describing this job.
 - `Schedule` - A standard cron syntax expression specifying the schedule for this job. (See below for more info on cron syntax)
-- `Timezone` - Timezone to run your cron jobs against.
-- `HTTP URL` - The URL for this cron job to target.
+- `Timezone` - Timezone to run your job's schedule against.
+- `HTTP URL` - The URL for this job to target.
 - `HTTP Method` - The HTTP method to use when pinging the target `HTTP URL`. All HTTP methods are supported. Defaults to `GET`.
 
 The following notification channels are available for job failures:
