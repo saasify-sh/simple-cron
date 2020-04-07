@@ -30,16 +30,13 @@ You can pause, resume, and permanently delete jobs. You can also view detailed i
 
 From the dashboard, select `Add New Job` to add your first cloud cron job for free.
 
-You'll need to enter three required fields:
+You can customize a cron job with the following options:
 
 - `Name` - A short recognizable name describing this job.
 - `Schedule` - A standard cron syntax expression specifying the schedule for this job. (See below for more info on cron syntax)
-- `HTTP URL` - A URL for this cron job to target.
-
-You may also specify a few optional fields:
-
-- `Description` - A longer description of the job.
-- `HTTP Method` - The HTTP method to use when pinging the target `HTTP URL`. Defaults to `GET` but you may use any valid HTTP method.
+- `Timezone` - Timezone to run your cron jobs against.
+- `HTTP URL` - The URL for this cron job to target.
+- `HTTP Method` - The HTTP method to use when pinging the target `HTTP URL`. All HTTP methods are supported. Defaults to `GET`.
 
 The following notification channels are available for job failures:
 
@@ -74,8 +71,6 @@ Here are some common examples to get you started.
 | `0 0 * * *`     | Daily at midnight                  |
 | `45 23 * * 6`   | Every Saturday at 23:45 (11:45 PM) |
 | `0 9 * * 1`     | Every Monday at 09:00              |
-
-All cron jobs currently use the GMT-4 (America/New York) timezone. If you'd like to use a different timezone to run your job(s), please contact support.
 
 ## Job Detail
 
@@ -119,7 +114,6 @@ In the near future, we'll be adding support for:
 - Customizable HTTP bodies for PUT and POST requests
 - Customizable HTTP headers
 - Customizable retry logic
-- Customizable timezone support
 - Customizable success / fail logic
 - More control over notifications
 - Job analytics over time

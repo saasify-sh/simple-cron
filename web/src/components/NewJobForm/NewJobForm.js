@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cs from 'classnames'
 import { isValidCron } from 'cron-validator'
+import { minimalTimezoneSet } from 'compact-timezone-list'
 
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   Tooltip,
   notification
 } from 'antd'
+
 import { sdk } from '../../lib/sdk'
 
 import styles from './styles.module.css'
@@ -56,14 +58,15 @@ export class NewJobForm extends Component {
           })(<Input placeholder='Name' />)}
         </Form.Item>
 
-        <Form.Item label='Description' {...formItemLayout}>
+        {/* <Form.Item label='Description' {...formItemLayout}>
           {getFieldDecorator('description')(
             <Input placeholder='Description' />
           )}
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item label='Schedule' {...formItemLayout}>
+        <Form.Item label='Cron Schedule' {...formItemLayout}>
           {getFieldDecorator('schedule', {
+            initialValue: '* * * * *',
             rules: [
               {
                 required: true,
@@ -81,7 +84,7 @@ export class NewJobForm extends Component {
             ]
           })(
             <Input
-              placeholder='Cron schedule'
+              placeholder='Cron expression'
               suffix={
                 <Tooltip title='Use standard cron syntax'>
                   <Icon
@@ -93,6 +96,22 @@ export class NewJobForm extends Component {
             />
           )}
         </Form.Item>
+
+        <Form.Item label='Timezone' {...formItemLayout}>
+          {getFieldDecorator('timezone', {
+            initialValue: 'America/New_York'
+          })(
+            <Select>
+              {minimalTimezoneSet.map((tz) => (
+                <Select.Option key={tz.tzCode} value={tz.tzCode}>
+                  {tz.label}
+                </Select.Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+
+        <Divider>HTTP Target</Divider>
 
         <Form.Item label='HTTP URL' {...formItemLayout}>
           {getFieldDecorator('url', {
@@ -127,8 +146,14 @@ export class NewJobForm extends Component {
 
         {/* TODO: add httpHeaders, httpBody, and httpQuery */}
 
-        <Divider />
+        <Divider onClick={this._onToggleNotifications}>Notifications</Divider>
 
+        {/* <div
+          className={cs(
+            styles.collapsible,
+            this.state.isNotificationsVisible && styles.expanded
+          )}
+        > */}
         <Form.Item label='Email' {...formItemLayout}>
           {getFieldDecorator('email', {
             rules: [
