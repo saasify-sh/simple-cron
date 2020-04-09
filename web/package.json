@@ -8,7 +8,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "deploy": "now --prod",
-    "postdeploy": "now rm --safe simple-cron-webapp"
+    "postdeploy": "now rm --safe --yes simple-cron-webapp"
   },
   "dependencies": {
     "antd": "^3.26.6",

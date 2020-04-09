@@ -22,7 +22,7 @@
     "test": "run-s build",
     "deploy": "now --prod",
     "predeploy": "run-s build",
-    "postdeploy": "now rm --safe simple-cron"
+    "postdeploy": "now rm --safe --yes simple-cron"
   },
   "dependencies": {
     "@google-cloud/firestore": "^3.7.3",
