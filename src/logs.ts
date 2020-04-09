@@ -17,10 +17,13 @@ export async function getJobLogs(
 ): Promise<types.LogEntry[]> {
   const filter = `resource.type="cloud_scheduler_job" AND resource.labels.job_id="${job.id}"`
 
+  console.time(`getJobLogs ${job.id}`)
   const [entries] = await client.getEntries({
     filter,
     pageSize: opts.limit || 25
   })
+  console.timeEnd(`getJobLogs ${job.id}`)
+  console.log(`getJobLogs ${job.id}`, entries.length, 'logs')
 
   return entries.map((entry) => encodeLogEntry(entry, job))
 }
