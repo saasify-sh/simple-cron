@@ -18,10 +18,6 @@ code {
     monospace;
 }
 
-#root {
-  height: 100%;
-}
-
 .ant-form-item {
   margin-bottom: 1em !important;
 }
