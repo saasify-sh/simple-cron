@@ -5,3 +5,5 @@ export const sdk = new SaasifySDK({
   developmentToken: process.env.REACT_APP_SAASIFY_TOKEN,
   developmentTargetUrl: 'http://localhost:4000'
 })
+
+// backendDevUrl vs backendUrl
